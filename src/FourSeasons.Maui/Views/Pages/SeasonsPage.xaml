@@ -1,12 +1,18 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:FourSeasons.Core.ViewModels;assembly=FourSeasons.Core"
              x:Class="FourSeasons.Maui.Views.Pages.SeasonsPage"
-             Title="SeasonsPage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+             Title="SeasonsPage"
+             x:DataType="vm:SeasonsPageViewModel">
+
+    <Grid RowDefinitions="100, *, 100" ColumnDefinitions="60, *, 200">
+        <!-- TODO: Solve centering of the image on Windows. Look at https://stackoverflow.com/questions/13535022/windows-8-image-uniformfill-centered -->
+        <Grid Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2"
+              HorizontalOptions="Fill" VerticalOptions="Fill"
+              IsClippedToBounds="True">
+            <Image x:Name="image" Aspect="AspectFill" Source="{Binding CurrentSeason.Image}"
+                   HorizontalOptions="Fill" VerticalOptions="Fill"/>
+        </Grid>
+    </Grid>
 </ContentPage>

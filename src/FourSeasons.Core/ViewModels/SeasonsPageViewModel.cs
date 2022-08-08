@@ -6,7 +6,18 @@ namespace FourSeasons.Core.ViewModels
     {
         private readonly ISeasonsService seasonsService;
 
+        private SeasonViewModel season;
         private IReadOnlyList<SeasonViewModel> seasons;
+
+        public SeasonViewModel CurrentSeason
+        {
+            get => season;
+            set
+            {
+                season = value;
+                OnPropertyChanged(nameof(CurrentSeason));
+            }
+        }
 
         public IReadOnlyList<SeasonViewModel> Seasons 
         { 
@@ -18,14 +29,18 @@ namespace FourSeasons.Core.ViewModels
             }
         }
 
+
         public SeasonsPageViewModel(ISeasonsService seasonsService)
         {
             this.seasonsService = seasonsService;
         }
 
+
         public override async Task OnAppearing()
         {
             await LoadSeasons();
+
+            CurrentSeason = Seasons.FirstOrDefault();
 
             await base.OnAppearing();
         }
@@ -34,6 +49,7 @@ namespace FourSeasons.Core.ViewModels
         {
             var seasons = await seasonsService.GetSeasons();
 
+            // TODO: Better mapping?
             Seasons = seasons.Select(s =>
             {
                 return new SeasonViewModel
