@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FourSeasons.Maui.Views.Controls.SwitchesBarView">
+
+    <Grid Padding="0" Margin="0">
+        <GraphicsView x:Name="graphicsView"/>
+        <AbsoluteLayout x:Name="absoluteLayout" Margin="0" Padding="0">
+            <BindableLayout.ItemTemplate>
+                <DataTemplate>
+                    <Grid IsClippedToBounds="True">
+                        <Grid ColumnDefinitions="auto, *">
+                            <ContentView WidthRequest="{Binding Source={x:Reference absoluteLayout}, Path=Height}"
+                                  HeightRequest="{Binding Source={x:Reference absoluteLayout}, Path=Height}">
+                                <Border x:Name="border" Margin="8" Background="White">
+                                    <Border.StrokeShape>
+                                        <RoundRectangle CornerRadius="{Binding Source={x:Reference border}, ConverterParameter=2, Converter={StaticResource DivideConverter}, Path=Height}"/>
+                                    </Border.StrokeShape>
+                                    <Image Source="{Binding Icon}"
+                                        VerticalOptions="Fill" HorizontalOptions="Fill"
+                                        Margin="5"
+                                        Aspect="AspectFit"/>
+                                </Border>
+                            </ContentView>
+                            <ContentView Grid.Column="1">
+                                <Label Text="{Binding Name}"
+                                       VerticalOptions="Center" HorizontalOptions="Start"
+                                       FontAttributes="Bold" TextColor="White"
+                                       LineBreakMode="NoWrap"
+                                       Margin="0,0,5,0"/>
+                            </ContentView>
+                        </Grid>
+                        <Button HorizontalOptions="Fill" VerticalOptions="Fill" Background="Transparent" 
+                                CornerRadius="{Binding Source={RelativeSource Mode=Self}, ConverterParameter=2, Converter={StaticResource DivideConverter}, Path=Height}"
+                                Clicked="ButtonClicked"
+                                BorderWidth="0" BorderColor="Transparent"/>
+                    </Grid>
+                </DataTemplate>
+            </BindableLayout.ItemTemplate>
+        </AbsoluteLayout>
+    </Grid>
+</ContentView>

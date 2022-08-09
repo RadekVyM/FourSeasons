@@ -4,7 +4,7 @@ using WImage = Microsoft.UI.Xaml.Controls.Image;
 
 namespace FourSeasons.Maui.Behaviors
 {
-    public partial class CenteredImageBehavior : PlatformBehavior<Image, WImage> // Note the use of UIImageView which is an iOS-specific API
+    public partial class CenteredImageBehavior : PlatformBehavior<Image, WImage>
     {
         private Image bindable;
         private WImage platformView;
@@ -27,9 +27,9 @@ namespace FourSeasons.Maui.Behaviors
 
         private void ParentSizeChanged(object sender, EventArgs e)
         {
-            double width = this.platformView.Width;
-            double height = this.platformView.Height;
-            var parentSize = new Size(this.parent.Width, this.parent.Height);
+            double width = platformView.Width;
+            double height = platformView.Height;
+            var parentSize = new Size(parent.Width, parent.Height);
             var parentRatio = parentSize.Width / parentSize.Height;
 
             if (platformView.Source is BitmapImage bitmap)

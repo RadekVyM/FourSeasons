@@ -54,10 +54,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Views\Controls\" />
-	</ItemGroup>
-
-	<ItemGroup>
+	  <MauiXaml Update="Views\Controls\SwitchesBarView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\Pages\SeasonsPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

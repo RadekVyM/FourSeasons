@@ -4,6 +4,7 @@ namespace FourSeasons.Core.ViewModels
 {
     public class SeasonsPageViewModel : BasePageViewModel, ISeasonsPageViewModel
     {
+        private bool initialAppearing = true;
         private readonly ISeasonsService seasonsService;
 
         private SeasonViewModel season;
@@ -38,11 +39,17 @@ namespace FourSeasons.Core.ViewModels
 
         public override async Task OnAppearing()
         {
-            await LoadSeasons();
+            if (initialAppearing)
+            {
+                await LoadSeasons();
 
-            CurrentSeason = Seasons.FirstOrDefault();
+                CurrentSeason = Seasons.FirstOrDefault();
+            }
 
             await base.OnAppearing();
+
+            if (initialAppearing)
+                initialAppearing = false;
         }
 
         private async Task LoadSeasons()

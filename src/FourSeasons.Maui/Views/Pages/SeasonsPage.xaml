@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:FourSeasons.Core.ViewModels;assembly=FourSeasons.Core"
+             xmlns:controls="clr-namespace:FourSeasons.Maui.Views.Controls"
              x:Class="FourSeasons.Maui.Views.Pages.SeasonsPage"
              Title="SeasonsPage"
              x:DataType="vm:SeasonsPageViewModel">
@@ -14,5 +15,10 @@
             <Image x:Name="image" Aspect="AspectFill" Source="{Binding CurrentSeason.Image}"
                    HorizontalOptions="Fill" VerticalOptions="Fill"/>
         </Grid>
+
+        <controls:SwitchesBarView Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2"
+                                  HorizontalOptions="Start" VerticalOptions="End"
+                                  Items="{Binding Seasons}" SelectedItem="{Binding CurrentSeason, Mode=TwoWay}"
+                                  HeightRequest="56" WidthRequest="320"/>
     </Grid>
 </ContentPage>
