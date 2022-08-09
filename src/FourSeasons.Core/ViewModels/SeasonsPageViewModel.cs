@@ -56,6 +56,8 @@ namespace FourSeasons.Core.ViewModels
         {
             var seasons = await seasonsService.GetSeasons();
 
+            int number = 0;
+
             // TODO: Better mapping?
             Seasons = seasons.Select(s =>
             {
@@ -66,6 +68,7 @@ namespace FourSeasons.Core.ViewModels
                     Icon = s.Icon,
                     Image = s.Image,
                     Name = s.Name,
+                    Number = ++number,
                     Location = s.LocationId is null ? null : new LocationViewModel
                     {
                         LocationId = s.Location.Id,

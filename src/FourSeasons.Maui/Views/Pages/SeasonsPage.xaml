@@ -7,7 +7,24 @@
              Title="SeasonsPage"
              x:DataType="vm:SeasonsPageViewModel">
 
-    <Grid RowDefinitions="100, *, 100" ColumnDefinitions="60, *, 200">
+    <ContentPage.Resources>
+        <Style TargetType="Label">
+            <Setter Property="TextColor" Value="{StaticResource Primary}"/>
+        </Style>
+    </ContentPage.Resources>
+
+    <Grid RowDefinitions="128,*,100" ColumnDefinitions="60,3*,2*">
+        <BoxView Grid.Column="2" Grid.RowSpan="3" Color="#f0f4f7"/>
+
+        <VerticalStackLayout Grid.Column="1" Spacing="8">
+            <Label FontFamily="Vertigup" FontSize="32" Text="Iran, four seasons" TextTransform="Uppercase"
+                   VerticalTextAlignment="End" HeightRequest="60"
+                   LineBreakMode="NoWrap"/>
+            <Label FontFamily="Vertigup" FontSize="32" Text="country" TextTransform="Uppercase"
+                   VerticalTextAlignment="Start" HeightRequest="60"
+                   LineBreakMode="NoWrap"/>
+        </VerticalStackLayout>
+
         <!-- TODO: Solve centering of the image on Windows. Look at https://stackoverflow.com/questions/13535022/windows-8-image-uniformfill-centered -->
         <Grid Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2"
               HorizontalOptions="Fill" VerticalOptions="Fill"
@@ -19,6 +36,29 @@
         <controls:SwitchesBarView Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2"
                                   HorizontalOptions="Start" VerticalOptions="End"
                                   Items="{Binding Seasons}" SelectedItem="{Binding CurrentSeason, Mode=TwoWay}"
-                                  HeightRequest="56" WidthRequest="320"/>
+                                  HeightRequest="56" WidthRequest="320"
+                                  Margin="20,16"/>
+
+        <Grid Grid.Row="2" Grid.Column="1"
+              ColumnDefinitions="auto,auto,*,auto"
+              ColumnSpacing="15"
+              Margin="0,0,90,0"
+              HorizontalOptions="Fill">
+            <Label FontFamily="Vertigup" FontSize="36" Text="{Binding CurrentSeason.Number, StringFormat='0.{0}'}"
+                   TextColor="{StaticResource Secondary}"
+                   VerticalOptions="Center"/>
+            <Label Grid.Column="1" FontFamily="PoppinsSemibold" FontAttributes="Bold" FontSize="20"
+                   Margin="0,4,0,0"
+                   Text="{Binding CurrentSeason.Name}"
+                   VerticalOptions="Center"/>
+            <BoxView Grid.Column="2"
+                     Color="{StaticResource Secondary}" Opacity="0.15"
+                     Margin="10,4,10,0"
+                     HorizontalOptions="FillAndExpand" VerticalOptions="Center" HeightRequest="1.5"/>
+            <Label Grid.Column="3" Margin="0,6,0,0"
+                   TextColor="{StaticResource Secondary}"
+                   Text="{Binding CurrentSeason.Location.CombinedAreaCountry, Mode=OneWay}"
+                   VerticalOptions="Center"/>
+        </Grid>
     </Grid>
 </ContentPage>

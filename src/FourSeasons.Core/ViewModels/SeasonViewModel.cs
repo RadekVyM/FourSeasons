@@ -7,6 +7,7 @@
         public string Image { get; init; }
         public string Icon { get; init; }
         public string Details { get; init; }
+        public int Number { get; init; }
         public LocationViewModel Location { get; init; }
         public IReadOnlyList<AttractionViewModel> Attractions { get; init; }
         public IReadOnlyList<TouristStatsViewModel> TouristStats { get; init; }

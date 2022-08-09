@@ -12,7 +12,7 @@
                         <Grid ColumnDefinitions="auto, *">
                             <ContentView WidthRequest="{Binding Source={x:Reference absoluteLayout}, Path=Height}"
                                   HeightRequest="{Binding Source={x:Reference absoluteLayout}, Path=Height}">
-                                <Border x:Name="border" Margin="8" Background="White">
+                                <Border x:Name="border" Margin="9" Background="White">
                                     <Border.StrokeShape>
                                         <RoundRectangle CornerRadius="{Binding Source={x:Reference border}, ConverterParameter=2, Converter={StaticResource DivideConverter}, Path=Height}"/>
                                     </Border.StrokeShape>
@@ -25,9 +25,9 @@
                             <ContentView Grid.Column="1">
                                 <Label Text="{Binding Name}"
                                        VerticalOptions="Center" HorizontalOptions="Start"
-                                       FontAttributes="Bold" TextColor="White"
+                                       TextColor="White"
                                        LineBreakMode="NoWrap"
-                                       Margin="0,0,5,0"/>
+                                       Margin="0,4,6,0"/>
                             </ContentView>
                         </Grid>
                         <Button HorizontalOptions="Fill" VerticalOptions="Fill" Background="Transparent" 

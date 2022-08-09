@@ -15,6 +15,13 @@ public partial class SeasonsPage : ContentPage
 		BindingContext = this.seasonsPageViewModel = seasonsPageViewModel;
 
 		Loaded += SeasonsPageLoaded;
+		Unloaded += SeasonsPageUnloaded;
+		SizeChanged += SeasonsPageSizeChanged;
+	}
+
+	private void SeasonsPageSizeChanged(object sender, EventArgs e)
+	{
+
 	}
 
 	private void SeasonsPageLoaded(object sender, EventArgs e)
@@ -24,7 +31,14 @@ public partial class SeasonsPage : ContentPage
 #endif
     }
 
-	protected override async void OnAppearing()
+    private void SeasonsPageUnloaded(object sender, EventArgs e)
+    {
+        Loaded -= SeasonsPageLoaded;
+        Unloaded -= SeasonsPageUnloaded;
+        SizeChanged -= SeasonsPageSizeChanged;
+    }
+
+    protected override async void OnAppearing()
 	{
         base.OnAppearing();
 		await seasonsPageViewModel.OnAppearing();

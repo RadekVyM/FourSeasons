@@ -19,7 +19,11 @@ public static class MauiProgram
 			{
 				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
 				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
-			});
+                fonts.AddFont("Poppins-Regular.ttf", "PoppinsRegular");
+                fonts.AddFont("Poppins-Semibold.ttf", "PoppinsSemibold");
+                fonts.AddFont("Vertigup.ttf", "Vertigup");
+                fonts.AddFont("SQUEMB.ttf", "SQUEMB");
+            });
 
 		builder.Services.AddDbContextFactory<ApplicationDbContext>();
 		builder.Services.AddSingleton<ISeasonsRepository, SeasonsRepository>();

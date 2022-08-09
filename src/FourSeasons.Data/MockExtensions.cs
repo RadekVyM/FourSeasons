@@ -51,7 +51,7 @@ namespace FourSeasons.Data
                     Id = summerGuid,
                     Name = "Summer",
                     Icon = "summer_icon.png",
-                    Image = "summer.png",
+                    Image = "summer.jpg",
                     Details = "enjoy the beauty of summer with various attractions available here, as well as various complete facilities available at affordable prices for all tourists from all over the world",
                     LocationId = location.Id
                 },
@@ -69,7 +69,7 @@ namespace FourSeasons.Data
                     Id = autumnGuid,
                     Name = "Autumn",
                     Icon = "autumn_icon.png",
-                    Image = "autumn.png",
+                    Image = "autumn.jpg",
                     Details = "enjoy the beauty of autumn with various attractions available here, as well as various complete facilities available at affordable prices for all tourists from all over the world",
                     LocationId = location.Id
                 },
@@ -78,7 +78,7 @@ namespace FourSeasons.Data
                     Id = rainyGuid,
                     Name = "Rainy",
                     Icon = "rainy_icon.png",
-                    Image = "rainy.png",
+                    Image = "rainy.jpg",
                     Details = "enjoy the beauty of rainy with various attractions available here, as well as various complete facilities available at affordable prices for all tourists from all over the world",
                     LocationId = location.Id
                 });

@@ -49,6 +49,16 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="Resources\Fonts\Poppins-Regular.ttf" />
+	  <None Remove="Resources\Fonts\Poppins-SemiBold.ttf" />
+	  <None Remove="Resources\Fonts\SQUEMB.TTF" />
+	  <None Remove="Resources\Fonts\vertigup.ttf" />
+	  <None Remove="Resources\Images\autumn.jpg" />
+	  <None Remove="Resources\Images\rainy.jpg" />
+	  <None Remove="Resources\Images\summer.jpg" />
+	</ItemGroup>
+
+	<ItemGroup>
 	  <ProjectReference Include="..\FourSeasons.Core\FourSeasons.Core.csproj" />
 	  <ProjectReference Include="..\FourSeasons.Data\FourSeasons.Data.csproj" />
 	</ItemGroup>
