@@ -5,6 +5,7 @@
         public Guid Id { get; set; }
         public string Name { get; set; }
         public string Image { get; set; }
+        public bool LightImage { get; set; }
         public string Icon { get; set; }
         public Guid? LocationId { get; set; }
         public virtual Location Location { get; set; }

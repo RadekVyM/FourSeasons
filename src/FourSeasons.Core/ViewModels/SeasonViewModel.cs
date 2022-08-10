@@ -5,6 +5,7 @@
         public Guid SeasonId { get; init; }
         public string Name { get; init; }
         public string Image { get; init; }
+        public bool LightImage { get; init; }
         public string Icon { get; init; }
         public string Details { get; init; }
         public int Number { get; init; }

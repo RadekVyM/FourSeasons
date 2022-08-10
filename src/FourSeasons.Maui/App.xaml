@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:FourSeasons.Maui"
              xmlns:converters="clr-namespace:FourSeasons.Maui.Converters"
+             xmlns:extensions="clr-namespace:FourSeasons.Maui.Extensions"
              x:Class="FourSeasons.Maui.App">
     <Application.Resources>
         <ResourceDictionary>
@@ -12,6 +13,10 @@
             </ResourceDictionary.MergedDictionaries>
 
             <converters:DivideConverter x:Key="DivideConverter"/>
+
+            <x:String x:Key="PinString">M12,0C7,0,3,4,3,9c0,6.2,3.4,11.7,8.5,14.9c0.3,0.2,0.7,0.2,1.1,0C17.6,20.6,21,15.2,21,9C21,4,17,0,12,0z M12,13   c-2.2,0-4-1.8-4-4c0-2.2,1.8-4,4-4s4,1.8,4,4C16,11.2,14.2,13,12,13z</x:String>
+
+            <extensions:PathGeometryExtension x:Key="PinGeometry" Path="{StaticResource PinString}"/>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

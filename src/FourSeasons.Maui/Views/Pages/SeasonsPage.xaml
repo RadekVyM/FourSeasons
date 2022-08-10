@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:FourSeasons.Core.ViewModels;assembly=FourSeasons.Core"
              xmlns:controls="clr-namespace:FourSeasons.Maui.Views.Controls"
+             xmlns:converters="clr-namespace:FourSeasons.Maui.Converters"
              x:Class="FourSeasons.Maui.Views.Pages.SeasonsPage"
              Title="SeasonsPage"
              x:DataType="vm:SeasonsPageViewModel">
@@ -11,12 +12,67 @@
         <Style TargetType="Label">
             <Setter Property="TextColor" Value="{StaticResource Primary}"/>
         </Style>
+
+        <converters:BoolConverter x:Key="NarrowHeaderLabelColor" True="{StaticResource Primary}" False="{StaticResource White}"/>
+        <converters:BoolConverter x:Key="NarrowHeaderDetailsColor" True="{StaticResource Secondary}" False="{StaticResource White}"/>
     </ContentPage.Resources>
 
-    <Grid RowDefinitions="128,*,100" ColumnDefinitions="60,3*,2*">
-        <BoxView Grid.Column="2" Grid.RowSpan="3" Color="#f0f4f7"/>
+    <VisualStateManager.VisualStateGroups>
+        <VisualStateGroup x:Name="Width">
+            <VisualState x:Name="Wide">
+                <VisualState.Setters>
+                    <Setter TargetName="WideHeaderContainer" Property="View.IsVisible" Value="True"/>
+                    <Setter TargetName="WideSeasonHeader" Property="View.IsVisible" Value="True"/>
+                    <Setter TargetName="NarrowSeasonHeader" Property="View.IsVisible" Value="False"/>
+                    <Setter TargetName="BackgroundBoxView" Property="View.IsVisible" Value="True"/>
 
-        <VerticalStackLayout Grid.Column="1" Spacing="8">
+                    <Setter TargetName="RootGrid" Property="Grid.RowDefinitions" Value="128,*,100"/>
+                    <Setter TargetName="RootGrid" Property="Grid.ColumnDefinitions" Value="60,3*,2*"/>
+
+                    <Setter TargetName="BackgroundImageContainer" Property="Grid.Row" Value="1"/>
+                    <Setter TargetName="BackgroundImageContainer" Property="Grid.Column" Value="1"/>
+                    <Setter TargetName="BackgroundImageContainer" Property="Grid.RowSpan" Value="1"/>
+                    <Setter TargetName="BackgroundImageContainer" Property="Grid.ColumnSpan" Value="2"/>
+
+                    <Setter TargetName="SwitchesBarView" Property="Grid.Row" Value="1"/>
+                    <Setter TargetName="SwitchesBarView" Property="Grid.Column" Value="1"/>
+                    <Setter TargetName="SwitchesBarView" Property="Grid.RowSpan" Value="1"/>
+                    <Setter TargetName="SwitchesBarView" Property="Grid.ColumnSpan" Value="2"/>
+                    <Setter TargetName="SwitchesBarView" Property="View.HorizontalOptions" Value="Start"/>
+                </VisualState.Setters>
+            </VisualState>
+
+            <VisualState x:Name="Narrow">
+                <VisualState.Setters>
+                    <Setter TargetName="WideHeaderContainer" Property="View.IsVisible" Value="False"/>
+                    <Setter TargetName="WideSeasonHeader" Property="View.IsVisible" Value="False"/>
+                    <Setter TargetName="NarrowSeasonHeader" Property="View.IsVisible" Value="True"/>
+                    <Setter TargetName="BackgroundBoxView" Property="View.IsVisible" Value="False"/>
+
+                    <Setter TargetName="RootGrid" Property="Grid.RowDefinitions" Value="*,auto"/>
+                    <Setter TargetName="RootGrid" Property="Grid.ColumnDefinitions" Value="*"/>
+
+                    <Setter TargetName="BackgroundImageContainer" Property="Grid.Row" Value="0"/>
+                    <Setter TargetName="BackgroundImageContainer" Property="Grid.Column" Value="0"/>
+                    <Setter TargetName="BackgroundImageContainer" Property="Grid.RowSpan" Value="2"/>
+                    <Setter TargetName="BackgroundImageContainer" Property="Grid.ColumnSpan" Value="1"/>
+
+                    <Setter TargetName="SwitchesBarView" Property="Grid.Row" Value="0"/>
+                    <Setter TargetName="SwitchesBarView" Property="Grid.Column" Value="0"/>
+                    <Setter TargetName="SwitchesBarView" Property="Grid.RowSpan" Value="1"/>
+                    <Setter TargetName="SwitchesBarView" Property="Grid.ColumnSpan" Value="1"/>
+                    <Setter TargetName="SwitchesBarView" Property="View.HorizontalOptions" Value="Center"/>
+                </VisualState.Setters>
+            </VisualState>
+        </VisualStateGroup>
+    </VisualStateManager.VisualStateGroups>
+    
+    <Grid x:Name="RootGrid"
+          RowDefinitions="128,*,100" ColumnDefinitions="60,3*,2*">
+        <BoxView x:Name="BackgroundBoxView" Grid.Column="2" Grid.RowSpan="3" Color="#f0f4f7"/>
+
+        <VerticalStackLayout x:Name="WideHeaderContainer"
+                             Grid.Column="1" Spacing="8">
             <Label FontFamily="Vertigup" FontSize="32" Text="Iran, four seasons" TextTransform="Uppercase"
                    VerticalTextAlignment="End" HeightRequest="60"
                    LineBreakMode="NoWrap"/>
@@ -26,20 +82,54 @@
         </VerticalStackLayout>
 
         <!-- TODO: Solve centering of the image on Windows. Look at https://stackoverflow.com/questions/13535022/windows-8-image-uniformfill-centered -->
-        <Grid Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2"
+        <Grid x:Name="BackgroundImageContainer"
+              Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2"
               HorizontalOptions="Fill" VerticalOptions="Fill"
               IsClippedToBounds="True">
             <Image x:Name="image" Aspect="AspectFill" Source="{Binding CurrentSeason.Image}"
                    HorizontalOptions="Fill" VerticalOptions="Fill"/>
         </Grid>
 
-        <controls:SwitchesBarView Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2"
+        <controls:SwitchesBarView x:Name="SwitchesBarView"
+                                  Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2"
                                   HorizontalOptions="Start" VerticalOptions="End"
                                   Items="{Binding Seasons}" SelectedItem="{Binding CurrentSeason, Mode=TwoWay}"
-                                  HeightRequest="56" WidthRequest="320"
+                                  HeightRequest="60" MaximumWidthRequest="340"
                                   Margin="20,16"/>
 
-        <Grid Grid.Row="2" Grid.Column="1"
+
+        <Grid x:Name="NarrowSeasonHeader"
+              Grid.Row="0" Grid.Column="0"
+              ColumnDefinitions="50,auto"
+              RowDefinitions="auto,auto,auto"
+              ColumnSpacing="5"
+              Margin="24,16"
+              HorizontalOptions="Fill" VerticalOptions="Start">
+            <Label FontFamily="PoppinsSemibold" FontAttributes="Bold" FontSize="48"
+                   Text="{Binding CurrentSeason.Number}"
+                   TextColor="{Binding CurrentSeason.LightImage, Converter={StaticResource NarrowHeaderLabelColor}}"
+                   VerticalOptions="Center" HorizontalOptions="Start"/>
+            <BoxView Grid.Column="1"
+                     Color="{Binding CurrentSeason.LightImage, Converter={StaticResource NarrowHeaderDetailsColor}}" Opacity="0.5"
+                     HorizontalOptions="Start" VerticalOptions="Center"
+                     WidthRequest="100" HeightRequest="1.5"/>
+            <Label Grid.Row="1" Grid.ColumnSpan="2"
+                   FontFamily="PoppinsSemibold" FontAttributes="Bold" FontSize="48"
+                   TextColor="{Binding CurrentSeason.LightImage, Converter={StaticResource NarrowHeaderLabelColor}}"
+                   Text="{Binding CurrentSeason.Name}"/>
+            <HorizontalStackLayout Grid.Row="2" Grid.ColumnSpan="2" Spacing="10">
+                <ContentView HeightRequest="18" VerticalOptions="Center">
+                    <Path Data="{StaticResource PinGeometry}" Fill="{Binding CurrentSeason.LightImage, Converter={StaticResource NarrowHeaderDetailsColor}}"
+                          Aspect="Uniform"/>
+                </ContentView>
+                <Label TextColor="{Binding CurrentSeason.LightImage, Converter={StaticResource NarrowHeaderDetailsColor}}"
+                       Text="{Binding CurrentSeason.Location.CombinedAreaCountry, Mode=OneWay}"
+                       VerticalOptions="Center" Margin="0,3,0,0"/>
+            </HorizontalStackLayout>
+        </Grid>
+
+        <Grid x:Name="WideSeasonHeader"
+              Grid.Row="2" Grid.Column="1"
               ColumnDefinitions="auto,auto,*,auto"
               ColumnSpacing="15"
               Margin="0,0,90,0"
@@ -55,10 +145,16 @@
                      Color="{StaticResource Secondary}" Opacity="0.15"
                      Margin="10,4,10,0"
                      HorizontalOptions="FillAndExpand" VerticalOptions="Center" HeightRequest="1.5"/>
-            <Label Grid.Column="3" Margin="0,6,0,0"
-                   TextColor="{StaticResource Secondary}"
-                   Text="{Binding CurrentSeason.Location.CombinedAreaCountry, Mode=OneWay}"
-                   VerticalOptions="Center"/>
+            
+            <HorizontalStackLayout Grid.Column="3" Margin="0,3,0,0" Spacing="10">
+                <ContentView HeightRequest="18" VerticalOptions="Center">
+                    <Path Data="{StaticResource PinGeometry}" Fill="{StaticResource Secondary}"
+                          Aspect="Uniform"/>
+                </ContentView>
+                <Label TextColor="{StaticResource Secondary}"
+                       Text="{Binding CurrentSeason.Location.CombinedAreaCountry, Mode=OneWay}"
+                       VerticalOptions="Center" Margin="0,3,0,0"/>
+            </HorizontalStackLayout>
         </Grid>
     </Grid>
 </ContentPage>

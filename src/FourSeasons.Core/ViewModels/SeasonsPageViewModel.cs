@@ -67,6 +67,7 @@ namespace FourSeasons.Core.ViewModels
                     Details = s.Details,
                     Icon = s.Icon,
                     Image = s.Image,
+                    LightImage = s.LightImage,
                     Name = s.Name,
                     Number = ++number,
                     Location = s.LocationId is null ? null : new LocationViewModel

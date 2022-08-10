@@ -21,7 +21,10 @@ public partial class SeasonsPage : ContentPage
 
 	private void SeasonsPageSizeChanged(object sender, EventArgs e)
 	{
+		var wide = "Wide";
+		var narrow = "Narrow";
 
+        VisualStateManager.GoToState(this, Width < 1000 ? narrow : wide);
 	}
 
 	private void SeasonsPageLoaded(object sender, EventArgs e)
