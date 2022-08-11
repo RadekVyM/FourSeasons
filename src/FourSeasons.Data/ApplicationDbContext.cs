@@ -16,9 +16,9 @@ namespace FourSeasons.Data
 
         public ApplicationDbContext()
         {
-            SQLitePCL.Batteries_V2.Init();
-           
-            DbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "fourseasons.db");
+            DbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "fourseasons.db3");
+
+            this.Database.EnsureCreated();
         }
 
         protected override void OnModelCreating(ModelBuilder builder)

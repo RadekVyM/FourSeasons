@@ -31,7 +31,11 @@ public partial class SwitchesBarView : ContentView
 
 		SizeChanged += SwitchesBarViewSizeChanged;
 
-        graphicsView.Drawable = drawable = new SwitchesBarDrawable();
+        graphicsView.Drawable = drawable = new SwitchesBarDrawable
+        {
+            SelectionColor = Color.FromArgb("#FF042351"),
+            BackgroundColor = Color.FromArgb("#77FFFFFF")
+        };
     }
 
 
@@ -89,14 +93,14 @@ public partial class SwitchesBarView : ContentView
             {
                 needsToBeChanged = !needsToBeChanged;
                 
-                var currentLeftO = itemView.X;
-                var newLeftO = left;
-                var currentWidthO = itemView.Width;
+                var currentLeftSelected = itemView.X;
+                var newLeftSelected = left;
+                var currentWidthSelected = itemView.Width;
 
                 animation.Add(0, 1, new Animation(v =>
                 {
-                    var l = currentLeftO + ((newLeftO - currentLeftO) * v);
-                    var w = currentWidthO + (((itemView.BindingContext == newSelected ? selectedItemWidth : defaultItemWidth) - currentWidthO) * v);
+                    var l = currentLeftSelected + ((newLeftSelected - currentLeftSelected) * v);
+                    var w = currentWidthSelected + (((itemView.BindingContext == newSelected ? selectedItemWidth : defaultItemWidth) - currentWidthSelected) * v);
                     var rect = new Rect(l, 0, w, itemHeight);
 
                     if (itemView.BindingContext == newSelected)

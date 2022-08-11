@@ -81,7 +81,6 @@
                    LineBreakMode="NoWrap"/>
         </VerticalStackLayout>
 
-        <!-- TODO: Solve centering of the image on Windows. Look at https://stackoverflow.com/questions/13535022/windows-8-image-uniformfill-centered -->
         <Grid x:Name="BackgroundImageContainer"
               Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2"
               HorizontalOptions="Fill" VerticalOptions="Fill"

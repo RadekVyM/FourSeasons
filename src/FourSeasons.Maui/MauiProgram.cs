@@ -5,6 +5,7 @@ using FourSeasons.Data;
 using FourSeasons.Data.Interfaces;
 using FourSeasons.Data.Repositories;
 using FourSeasons.Maui.Views.Pages;
+using SQLitePCL;
 
 namespace FourSeasons.Maui;
 

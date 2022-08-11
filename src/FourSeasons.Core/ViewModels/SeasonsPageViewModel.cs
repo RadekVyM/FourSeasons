@@ -8,7 +8,7 @@ namespace FourSeasons.Core.ViewModels
         private readonly ISeasonsService seasonsService;
 
         private SeasonViewModel season;
-        private IReadOnlyList<SeasonViewModel> seasons;
+        private IReadOnlyList<SeasonViewModel> seasons = new List<SeasonViewModel>();
 
         public SeasonViewModel CurrentSeason
         {
