@@ -27,7 +27,7 @@
                     <Setter TargetName="BackgroundBoxView" Property="View.IsVisible" Value="True"/>
 
                     <Setter TargetName="RootGrid" Property="Grid.RowDefinitions" Value="128,*,100"/>
-                    <Setter TargetName="RootGrid" Property="Grid.ColumnDefinitions" Value="60,3*,2*"/>
+                    <Setter TargetName="RootGrid" Property="Grid.ColumnDefinitions" Value="60,5*,4*"/>
 
                     <Setter TargetName="BackgroundImageContainer" Property="Grid.Row" Value="1"/>
                     <Setter TargetName="BackgroundImageContainer" Property="Grid.Column" Value="1"/>
@@ -39,6 +39,15 @@
                     <Setter TargetName="SwitchesBarView" Property="Grid.RowSpan" Value="1"/>
                     <Setter TargetName="SwitchesBarView" Property="Grid.ColumnSpan" Value="2"/>
                     <Setter TargetName="SwitchesBarView" Property="View.HorizontalOptions" Value="Start"/>
+
+                    <Setter TargetName="DetailsRootContainer" Property="Grid.Row" Value="0"/>
+                    <Setter TargetName="DetailsRootContainer" Property="Grid.Column" Value="2"/>
+                    <Setter TargetName="DetailsRootContainer" Property="Grid.RowSpan" Value="2"/>
+                    <Setter TargetName="DetailsRootContainer" Property="Grid.ColumnSpan" Value="1"/>
+                    <Setter TargetName="DetailsRootContainer" Property="View.HorizontalOptions" Value="End"/>
+                    <Setter TargetName="DetailsRootContainer" Property="View.VerticalOptions" Value="Start"/>
+                    <Setter TargetName="DetailsRootContainer" Property="View.Margin" Value="40,25,60,20"/>
+                    <Setter TargetName="DetailsRootContainer" Property="View.MaximumWidthRequest" Value="400"/>
                 </VisualState.Setters>
             </VisualState>
 
@@ -66,9 +75,9 @@
             </VisualState>
         </VisualStateGroup>
     </VisualStateManager.VisualStateGroups>
-    
+
     <Grid x:Name="RootGrid"
-          RowDefinitions="128,*,100" ColumnDefinitions="60,3*,2*">
+          RowDefinitions="128,*,100" ColumnDefinitions="60,5*,4*">
         <BoxView x:Name="BackgroundBoxView" Grid.Column="2" Grid.RowSpan="3" Color="#f0f4f7"/>
 
         <VerticalStackLayout x:Name="WideHeaderContainer"
@@ -81,6 +90,7 @@
                    LineBreakMode="NoWrap"/>
         </VerticalStackLayout>
 
+        <!-- TODO: Ignore safe area -->
         <Grid x:Name="BackgroundImageContainer"
               Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2"
               HorizontalOptions="Fill" VerticalOptions="Fill"
@@ -155,5 +165,54 @@
                        VerticalOptions="Center" Margin="0,3,0,0"/>
             </HorizontalStackLayout>
         </Grid>
+
+        <Border x:Name="DetailsRootContainer"
+                Grid.Row="0" Grid.Column="2"
+                StrokeThickness="0" Stroke="Transparent"
+                Background="White">
+            <!-- Shadow sizing is weird on Windows -->
+            <Border.Shadow>
+                <Shadow Brush="{StaticResource Gray300}" Radius="5"/>
+            </Border.Shadow>
+
+            <ScrollView VerticalOptions="Fill" HorizontalOptions="Fill"
+                        Orientation="Vertical">
+                <Grid VerticalOptions="Fill" HorizontalOptions="Fill"
+                      Padding="24"
+                      RowDefinitions="auto,auto,auto,auto"
+                      RowSpacing="24">
+                    <VerticalStackLayout x:Name="DetailsContainer" Spacing="10">
+                        <Label Text="Details" FontFamily="PoppinsSemiBold" FontAttributes="Bold" FontSize="16"/>
+                        
+                        <Label Text="{Binding CurrentSeason.Details}"
+                               HorizontalOptions="Fill"/>
+                    </VerticalStackLayout>
+
+                    <VerticalStackLayout x:Name="DistanceContainer"
+                                         Grid.Row="1" Spacing="10">
+                        <Label Text="Distance" FontFamily="PoppinsSemiBold" FontAttributes="Bold" FontSize="16"/>
+                        
+                        <controls:DistanceView BindingContext="{Binding CurrentSeason.Distance}"
+                                               HorizontalOptions="Fill"/>
+                    </VerticalStackLayout>
+
+                    <VerticalStackLayout x:Name="VisitorsContainer"
+                                         Grid.Row="2" Spacing="10">
+                        <Label Text="Visitors" FontFamily="PoppinsSemiBold" FontAttributes="Bold" FontSize="16"/>
+
+                        <controls:VisitorsView BindingContext="{Binding CurrentSeason.TouristStats}"
+                                               HorizontalOptions="Fill"/>
+                    </VerticalStackLayout>
+
+                    <VerticalStackLayout x:Name="AttractionsContainer"
+                                         Grid.Row="3" Spacing="10">
+                        <Label Text="TopAttractions" FontFamily="PoppinsSemiBold" FontAttributes="Bold" FontSize="16"/>
+
+                        <controls:AttractionsView BindingContext="{Binding CurrentSeason.Attractions}"
+                                                  HorizontalOptions="Fill"/>
+                    </VerticalStackLayout>
+                </Grid>
+            </ScrollView>
+        </Border>
     </Grid>
 </ContentPage>

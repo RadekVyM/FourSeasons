@@ -1,7 +1,9 @@
 ﻿namespace FourSeasons.Core.ViewModels
 {
-    public class SeasonViewModel
+    public class SeasonViewModel : ObservableObject
     {
+        private DistanceViewModel distance;
+
         public Guid SeasonId { get; init; }
         public string Name { get; init; }
         public string Image { get; init; }
@@ -12,5 +14,14 @@
         public LocationViewModel Location { get; init; }
         public IReadOnlyList<AttractionViewModel> Attractions { get; init; }
         public IReadOnlyList<TouristStatsViewModel> TouristStats { get; init; }
+        public DistanceViewModel Distance 
+        { 
+            get => distance;
+            set
+            {
+                distance = value;
+                OnPropertyChanged(nameof(Distance));
+            }
+        }
     }
 }

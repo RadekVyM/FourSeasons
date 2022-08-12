@@ -16,6 +16,9 @@ namespace FourSeasons.Core.ViewModels
             set
             {
                 season = value;
+
+                season.Distance = GetDefaultDistanceForSeason(season);
+
                 OnPropertyChanged(nameof(CurrentSeason));
             }
         }
@@ -84,7 +87,7 @@ namespace FourSeasons.Core.ViewModels
                             Image = a.Image,
                             Name = a.Name
                         };
-                    }).ToList(),
+                    }).Take(3).ToList(),
                     TouristStats = s.TouristStats.Select(t =>
                     {
                         return new TouristStatsViewModel
@@ -104,6 +107,17 @@ namespace FourSeasons.Core.ViewModels
                     }).ToList()
                 };
             }).ToList();
+        }
+
+        private DistanceViewModel GetDefaultDistanceForSeason(SeasonViewModel season)
+        {
+            return new DistanceViewModel
+            {
+                CurrentLocation = "Prague",
+                DestinationLocation = season.Location.Area,
+                Distance = 4002,
+                TypeOfTransport = TypeOfTransport.Car
+            };
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace FourSeasons.Core.ViewModels
 {
-    public class AttractionViewModel
+    public class AttractionViewModel : ObservableObject
     {
         public Guid AttractionId { get; init; }
         public string Name { get; init; }

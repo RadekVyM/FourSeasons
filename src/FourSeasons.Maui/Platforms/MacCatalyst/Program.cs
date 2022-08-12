@@ -1,5 +1,8 @@
 ﻿using ObjCRuntime;
 using UIKit;
+using Foundation;
+
+[assembly: Preserve(typeof(System.Linq.Queryable), AllMembers = true)]
 
 namespace FourSeasons.Maui;
 

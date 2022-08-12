@@ -1,6 +1,6 @@
 ﻿namespace FourSeasons.Core.ViewModels
 {
-    public class MonthlyTouristStatsViewModel
+    public class MonthlyTouristStatsViewModel : ObservableObject
     {
         public Guid MonthlyTouristStatsId { get; init; }
         public int Stats { get; init; }

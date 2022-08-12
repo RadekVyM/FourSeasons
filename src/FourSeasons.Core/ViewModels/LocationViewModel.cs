@@ -1,6 +1,6 @@
 ﻿namespace FourSeasons.Core.ViewModels
 {
-    public class LocationViewModel
+    public class LocationViewModel : ObservableObject
     {
         public Guid LocationId { get; init; }
         public string Country { get; init; }
