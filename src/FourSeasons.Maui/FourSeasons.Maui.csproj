@@ -67,6 +67,9 @@
 	  <MauiXaml Update="Views\Controls\AttractionsView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\Controls\DetailsImageView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\Controls\DistanceView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

@@ -26,7 +26,7 @@
                     <Setter TargetName="NarrowSeasonHeader" Property="View.IsVisible" Value="False"/>
                     <Setter TargetName="BackgroundBoxView" Property="View.IsVisible" Value="True"/>
 
-                    <Setter TargetName="RootGrid" Property="Grid.RowDefinitions" Value="128,*,100"/>
+                    <Setter TargetName="RootGrid" Property="Grid.RowDefinitions" Value="128,*,80"/>
                     <Setter TargetName="RootGrid" Property="Grid.ColumnDefinitions" Value="60,5*,4*"/>
 
                     <Setter TargetName="BackgroundImageContainer" Property="Grid.Row" Value="1"/>
@@ -48,6 +48,20 @@
                     <Setter TargetName="DetailsRootContainer" Property="View.VerticalOptions" Value="Start"/>
                     <Setter TargetName="DetailsRootContainer" Property="View.Margin" Value="40,25,60,20"/>
                     <Setter TargetName="DetailsRootContainer" Property="View.MaximumWidthRequest" Value="400"/>
+                    <Setter TargetName="DetailsRootContainer" Property="View.TranslationY" Value="0"/>
+
+                    <Setter TargetName="DetailsHeaderContainer" Property="View.IsVisible" Value="False"/>
+                    
+                    <Setter TargetName="DetailsBaseContainer" Property="Grid.RowDefinitions" Value="*"/>
+                    <Setter TargetName="DetailsScrollView" Property="Grid.Row" Value="0"/>
+
+                    <Setter TargetName="DetailsImageView" Property="View.IsVisible" Value="False"/>
+                    
+                    <Setter TargetName="DetailsImageView" Property="Grid.Row" Value="0"/>
+                    <Setter TargetName="DetailsContainer" Property="Grid.Row" Value="0"/>
+                    <Setter TargetName="DistanceContainer" Property="Grid.Row" Value="1"/>
+                    <Setter TargetName="VisitorsContainer" Property="Grid.Row" Value="2"/>
+                    <Setter TargetName="AttractionsContainer" Property="Grid.Row" Value="3"/>
                 </VisualState.Setters>
             </VisualState>
 
@@ -58,7 +72,7 @@
                     <Setter TargetName="NarrowSeasonHeader" Property="View.IsVisible" Value="True"/>
                     <Setter TargetName="BackgroundBoxView" Property="View.IsVisible" Value="False"/>
 
-                    <Setter TargetName="RootGrid" Property="Grid.RowDefinitions" Value="*,auto"/>
+                    <Setter TargetName="RootGrid" Property="Grid.RowDefinitions" Value="*,80"/>
                     <Setter TargetName="RootGrid" Property="Grid.ColumnDefinitions" Value="*"/>
 
                     <Setter TargetName="BackgroundImageContainer" Property="Grid.Row" Value="0"/>
@@ -71,13 +85,38 @@
                     <Setter TargetName="SwitchesBarView" Property="Grid.RowSpan" Value="1"/>
                     <Setter TargetName="SwitchesBarView" Property="Grid.ColumnSpan" Value="1"/>
                     <Setter TargetName="SwitchesBarView" Property="View.HorizontalOptions" Value="Center"/>
+
+                    <Setter TargetName="DetailsRootContainer" Property="Grid.Row" Value="0"/>
+                    <Setter TargetName="DetailsRootContainer" Property="Grid.Column" Value="0"/>
+                    <Setter TargetName="DetailsRootContainer" Property="Grid.RowSpan" Value="2"/>
+                    <Setter TargetName="DetailsRootContainer" Property="View.HorizontalOptions" Value="Fill"/>
+                    <Setter TargetName="DetailsRootContainer" Property="View.VerticalOptions" Value="Fill"/>
+                    <Setter TargetName="DetailsRootContainer" Property="View.Margin" Value="0"/>
+                    <Setter TargetName="DetailsRootContainer" Property="Border.StrokeShape">
+                        <Setter.Value>
+                            <RoundRectangle CornerRadius="24,24,0,0"/>
+                        </Setter.Value>
+                    </Setter>
+
+                    <Setter TargetName="DetailsHeaderContainer" Property="View.IsVisible" Value="True"/>
+                    
+                    <Setter TargetName="DetailsBaseContainer" Property="Grid.RowDefinitions" Value="80,*"/>
+                    <Setter TargetName="DetailsScrollView" Property="Grid.Row" Value="1"/>
+
+                    <Setter TargetName="DetailsImageView" Property="View.IsVisible" Value="True"/>
+                    
+                    <Setter TargetName="DetailsImageView" Property="Grid.Row" Value="0"/>
+                    <Setter TargetName="DetailsContainer" Property="Grid.Row" Value="2"/>
+                    <Setter TargetName="DistanceContainer" Property="Grid.Row" Value="1"/>
+                    <Setter TargetName="VisitorsContainer" Property="Grid.Row" Value="4"/>
+                    <Setter TargetName="AttractionsContainer" Property="Grid.Row" Value="3"/>
                 </VisualState.Setters>
             </VisualState>
         </VisualStateGroup>
     </VisualStateManager.VisualStateGroups>
 
     <Grid x:Name="RootGrid"
-          RowDefinitions="128,*,100" ColumnDefinitions="60,5*,4*">
+          RowDefinitions="128,*,80" ColumnDefinitions="60,5*,4*">
         <BoxView x:Name="BackgroundBoxView" Grid.Column="2" Grid.RowSpan="3" Color="#f0f4f7"/>
 
         <VerticalStackLayout x:Name="WideHeaderContainer"
@@ -168,51 +207,69 @@
 
         <Border x:Name="DetailsRootContainer"
                 Grid.Row="0" Grid.Column="2"
-                StrokeThickness="0" Stroke="Transparent"
-                Background="White">
+                StrokeThickness="1" Stroke="{StaticResource Gray100}"
+                Background="White"
+                Margin="-1"
+                SizeChanged="DetailsRootContainerSizeChanged">
             <!-- Shadow sizing is weird on Windows -->
-            <Border.Shadow>
+            <!--<Border.Shadow>
                 <Shadow Brush="{StaticResource Gray300}" Radius="5"/>
-            </Border.Shadow>
+            </Border.Shadow>-->
 
-            <ScrollView VerticalOptions="Fill" HorizontalOptions="Fill"
-                        Orientation="Vertical">
-                <Grid VerticalOptions="Fill" HorizontalOptions="Fill"
-                      Padding="24"
-                      RowDefinitions="auto,auto,auto,auto"
-                      RowSpacing="24">
-                    <VerticalStackLayout x:Name="DetailsContainer" Spacing="10">
-                        <Label Text="Details" FontFamily="PoppinsSemiBold" FontAttributes="Bold" FontSize="16"/>
-                        
-                        <Label Text="{Binding CurrentSeason.Details}"
-                               HorizontalOptions="Fill"/>
-                    </VerticalStackLayout>
+            <Grid x:Name="DetailsBaseContainer" RowDefinitions="auto,*" HorizontalOptions="Fill" VerticalOptions="Fill">
+                <Grid x:Name="DetailsHeaderContainer">
+                    <Grid.GestureRecognizers>
+                        <PanGestureRecognizer PanUpdated="DetailsPanUpdated"/>
+                    </Grid.GestureRecognizers>
 
-                    <VerticalStackLayout x:Name="DistanceContainer"
-                                         Grid.Row="1" Spacing="10">
-                        <Label Text="Distance" FontFamily="PoppinsSemiBold" FontAttributes="Bold" FontSize="16"/>
-                        
-                        <controls:DistanceView BindingContext="{Binding CurrentSeason.Distance}"
-                                               HorizontalOptions="Fill"/>
-                    </VerticalStackLayout>
-
-                    <VerticalStackLayout x:Name="VisitorsContainer"
-                                         Grid.Row="2" Spacing="10">
-                        <Label Text="Visitors" FontFamily="PoppinsSemiBold" FontAttributes="Bold" FontSize="16"/>
-
-                        <controls:VisitorsView BindingContext="{Binding CurrentSeason.TouristStats}"
-                                               HorizontalOptions="Fill"/>
-                    </VerticalStackLayout>
-
-                    <VerticalStackLayout x:Name="AttractionsContainer"
-                                         Grid.Row="3" Spacing="10">
-                        <Label Text="TopAttractions" FontFamily="PoppinsSemiBold" FontAttributes="Bold" FontSize="16"/>
-
-                        <controls:AttractionsView BindingContext="{Binding CurrentSeason.Attractions}"
-                                                  HorizontalOptions="Fill"/>
-                    </VerticalStackLayout>
+                    <Button Text="Show" Clicked="ShowButtonClicked"
+                            Background="Transparent" TextColor="{StaticResource Secondary}"
+                            BorderWidth="0" BorderColor="Transparent"
+                            HorizontalOptions="Center" VerticalOptions="Center"/>
                 </Grid>
-            </ScrollView>
+
+                <ScrollView x:Name="DetailsScrollView" VerticalOptions="Fill" HorizontalOptions="Fill"
+                            Orientation="Vertical">
+                    <Grid x:Name="DetailsScrollingContainer" VerticalOptions="Fill" HorizontalOptions="Fill"
+                          Padding="24"
+                          RowDefinitions="auto,auto,auto,auto,auto"
+                          RowSpacing="24">
+                        
+                        <controls:DetailsImageView x:Name="DetailsImageView"/>
+
+                        <VerticalStackLayout x:Name="DetailsContainer" Spacing="10">
+                            <Label Text="Details" FontFamily="PoppinsSemiBold" FontAttributes="Bold" FontSize="16"/>
+
+                            <Label Text="{Binding CurrentSeason.Details}"
+                                   HorizontalOptions="Fill"/>
+                        </VerticalStackLayout>
+
+                        <VerticalStackLayout x:Name="DistanceContainer"
+                                             Grid.Row="1" Spacing="10">
+                            <Label Text="Distance" FontFamily="PoppinsSemiBold" FontAttributes="Bold" FontSize="16"/>
+
+                            <controls:DistanceView BindingContext="{Binding CurrentSeason.Distance}"
+                                                   HorizontalOptions="Fill"/>
+                        </VerticalStackLayout>
+
+                        <VerticalStackLayout x:Name="VisitorsContainer"
+                                             Grid.Row="2" Spacing="10">
+                            <Label Text="Visitors" FontFamily="PoppinsSemiBold" FontAttributes="Bold" FontSize="16"/>
+
+                            <controls:VisitorsView BindingContext="{Binding CurrentSeason.TouristStats}"
+                                                   HorizontalOptions="Fill"/>
+                        </VerticalStackLayout>
+
+                        <VerticalStackLayout x:Name="AttractionsContainer"
+                                             Grid.Row="3" Spacing="10">
+                            <Label Text="TopAttractions" FontFamily="PoppinsSemiBold" FontAttributes="Bold" FontSize="16"/>
+
+                            <controls:AttractionsView BindingContext="{Binding CurrentSeason.Attractions}"
+                                                      HorizontalOptions="Fill"/>
+                        </VerticalStackLayout>
+                    </Grid>
+                </ScrollView>
+            </Grid>
         </Border>
     </Grid>
 </ContentPage>
