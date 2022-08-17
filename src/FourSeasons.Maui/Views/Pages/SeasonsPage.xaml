@@ -12,9 +12,6 @@
         <Style TargetType="Label">
             <Setter Property="TextColor" Value="{StaticResource Primary}"/>
         </Style>
-
-        <converters:BoolConverter x:Key="NarrowHeaderLabelColor" True="{StaticResource Primary}" False="{StaticResource White}"/>
-        <converters:BoolConverter x:Key="NarrowHeaderDetailsColor" True="{StaticResource Secondary}" False="{StaticResource White}"/>
     </ContentPage.Resources>
 
     <VisualStateManager.VisualStateGroups>
@@ -51,8 +48,9 @@
                     <Setter TargetName="DetailsRootContainer" Property="View.TranslationY" Value="0"/>
 
                     <Setter TargetName="DetailsHeaderContainer" Property="View.IsVisible" Value="False"/>
-                    
+
                     <Setter TargetName="DetailsBaseContainer" Property="Grid.RowDefinitions" Value="*"/>
+                    <Setter TargetName="DetailsScrollingContainer" Property="Grid.Padding" Value="24"/>
                     <Setter TargetName="DetailsScrollView" Property="Grid.Row" Value="0"/>
 
                     <Setter TargetName="DetailsImageView" Property="View.IsVisible" Value="False"/>
@@ -92,15 +90,11 @@
                     <Setter TargetName="DetailsRootContainer" Property="View.HorizontalOptions" Value="Fill"/>
                     <Setter TargetName="DetailsRootContainer" Property="View.VerticalOptions" Value="Fill"/>
                     <Setter TargetName="DetailsRootContainer" Property="View.Margin" Value="0"/>
-                    <Setter TargetName="DetailsRootContainer" Property="Border.StrokeShape">
-                        <Setter.Value>
-                            <RoundRectangle CornerRadius="24,24,0,0"/>
-                        </Setter.Value>
-                    </Setter>
 
                     <Setter TargetName="DetailsHeaderContainer" Property="View.IsVisible" Value="True"/>
                     
                     <Setter TargetName="DetailsBaseContainer" Property="Grid.RowDefinitions" Value="80,*"/>
+                    <Setter TargetName="DetailsScrollingContainer" Property="Grid.Padding" Value="24,0,24,24"/>
                     <Setter TargetName="DetailsScrollView" Property="Grid.Row" Value="1"/>
 
                     <Setter TargetName="DetailsImageView" Property="View.IsVisible" Value="True"/>
@@ -144,7 +138,6 @@
                                   Items="{Binding Seasons}" SelectedItem="{Binding CurrentSeason, Mode=TwoWay}"
                                   HeightRequest="60" MaximumWidthRequest="340"
                                   Margin="20,16"/>
-
 
         <Grid x:Name="NarrowSeasonHeader"
               Grid.Row="0" Grid.Column="0"
@@ -216,16 +209,54 @@
                 <Shadow Brush="{StaticResource Gray300}" Radius="5"/>
             </Border.Shadow>-->
 
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="0"/>
+            </Border.StrokeShape>
+            
             <Grid x:Name="DetailsBaseContainer" RowDefinitions="auto,*" HorizontalOptions="Fill" VerticalOptions="Fill">
                 <Grid x:Name="DetailsHeaderContainer">
                     <Grid.GestureRecognizers>
                         <PanGestureRecognizer PanUpdated="DetailsPanUpdated"/>
                     </Grid.GestureRecognizers>
 
-                    <Button Text="Show" Clicked="ShowButtonClicked"
+                    <Button x:Name="ShowDetailsButton" Text="Click for Details" Clicked="ShowButtonClicked"
                             Background="Transparent" TextColor="{StaticResource Secondary}"
                             BorderWidth="0" BorderColor="Transparent"
                             HorizontalOptions="Center" VerticalOptions="Center"/>
+                    
+                    <Grid x:Name="HideDetailsButton"
+                          HorizontalOptions="End" VerticalOptions="Center"
+                          Margin="0,0,20,0"
+                          IsVisible="False">
+                        <Path Stroke="{StaticResource Primary}" StrokeThickness="1.5" StrokeLineJoin="Round" StrokeLineCap="Round"
+                              Aspect="Uniform" Data="M0,0 L10,10 M0,10 L10,0"
+                              WidthRequest="16" HeightRequest="16"/>
+                        <Button Clicked="HideButtonClicked"
+                                Background="Transparent" TextColor="{StaticResource Secondary}"
+                                BorderWidth="0" BorderColor="Transparent"/>
+                    </Grid>
+                    
+                    <Label x:Name="HeaderDetailsLabel" Text="Details"
+                           FontSize="16" FontAttributes="Bold" Margin="0,4,0,0"
+                           HorizontalOptions="Center" VerticalOptions="Center"
+                           IsVisible="False"/>
+                    
+                    <Grid x:Name="SwipeUpDetailsContainer"
+                          RowDefinitions="*,*" RowSpacing="6">
+                        <Border HorizontalOptions="Center" VerticalOptions="End"
+                                WidthRequest="22" HeightRequest="22" Padding="6"
+                                StrokeThickness="0" Background="#eef1f6">
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="11"/>
+                            </Border.StrokeShape>
+                            <!-- I have to wrap Path to ContentView because of weir sizing -->
+                            <Path Stroke="{StaticResource Primary}" StrokeThickness="2" StrokeLineJoin="Round" StrokeLineCap="Round"
+                                  Aspect="Uniform" Data="M0,9 L8,0 L16,9"/>
+                        </Border>
+                        <Label Grid.Row="1" HorizontalOptions="Center" VerticalOptions="Start"
+                               Text="Swipe Up for Details"
+                               TextColor="{StaticResource Secondary}" FontAttributes="Bold"/>
+                    </Grid>
                 </Grid>
 
                 <ScrollView x:Name="DetailsScrollView" VerticalOptions="Fill" HorizontalOptions="Fill"
@@ -262,7 +293,7 @@
 
                         <VerticalStackLayout x:Name="AttractionsContainer"
                                              Grid.Row="3" Spacing="10">
-                            <Label Text="TopAttractions" FontFamily="PoppinsSemiBold" FontAttributes="Bold" FontSize="16"/>
+                            <Label Text="Top Attractions" FontFamily="PoppinsSemiBold" FontAttributes="Bold" FontSize="16"/>
 
                             <controls:AttractionsView BindingContext="{Binding CurrentSeason.Attractions}"
                                                       HorizontalOptions="Fill"/>

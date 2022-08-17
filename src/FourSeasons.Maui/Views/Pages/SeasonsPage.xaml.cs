@@ -1,4 +1,5 @@
 using FourSeasons.Core.Interfaces;
+using Microsoft.Maui.Controls.Shapes;
 #if WINDOWS
 using FourSeasons.Maui.Behaviors;
 #endif
@@ -15,6 +16,9 @@ public partial class SeasonsPage : ContentPage
     private double detailsShownPosition => 0;
 	private double detailsHiddenPosition = 0;
     private double lastDetailsTranslation = 0;
+    private double wideDetailsRootContainerCornerRadius = 0;
+    private double narrowDetailsRootContainerCornerRadius = 24;
+    private bool isTouchBased => DeviceInfo.Current.Platform == DevicePlatform.iOS || DeviceInfo.Current.Platform == DevicePlatform.Android || DeviceInfo.Current.Platform == DevicePlatform.watchOS;
 
     private string currentState = "";
     private bool isDetailsRootContainerOpen = false;
@@ -25,6 +29,9 @@ public partial class SeasonsPage : ContentPage
 	public SeasonsPage(ISeasonsPageViewModel seasonsPageViewModel)
 	{
 		InitializeComponent();
+
+        ShowDetailsButton.IsVisible = !isTouchBased;
+        SwipeUpDetailsContainer.IsVisible = isTouchBased;
 
         BindingContext = this.seasonsPageViewModel = seasonsPageViewModel;
 
@@ -46,20 +53,44 @@ public partial class SeasonsPage : ContentPage
 
         VisualStateManager.GoToState(this, currentState);
 
+        UpdateDetailsRootContainerCornerRadius(isNarrow ? narrowDetailsRootContainerCornerRadius : wideDetailsRootContainerCornerRadius);
+
         if (isNarrow)
             isDetailsRootContainerOpen = false;
     }
 
+    private void UpdateDetailsRootContainerCornerRadius(double cornerRadius)
+    {
+        var roundRect = new RoundRectangle
+        {
+            CornerRadius = new CornerRadius(cornerRadius, cornerRadius, 0, 0)
+        };
+
+        DetailsRootContainer.StrokeShape = roundRect;
+    }
+
     private async Task HideDetails()
     {
+        UpdateDetailsRootContainerCornerRadius(narrowDetailsRootContainerCornerRadius);
+
         await DetailsRootContainer.TranslateTo(0, detailsHiddenPosition, length: 250);
         isDetailsRootContainerOpen = false;
+        ShowDetailsButton.IsVisible = !isTouchBased && true;
+        HideDetailsButton.IsVisible = false;
+        HeaderDetailsLabel.IsVisible = false;
+        SwipeUpDetailsContainer.IsVisible = isTouchBased && true;
     }
 
     private async Task ShowDetails()
     {
         await DetailsRootContainer.TranslateTo(0, detailsShownPosition, length: 250);
         isDetailsRootContainerOpen = true;
+        ShowDetailsButton.IsVisible = !isTouchBased && false;
+        HideDetailsButton.IsVisible = true;
+        HeaderDetailsLabel.IsVisible = true;
+        SwipeUpDetailsContainer.IsVisible = isTouchBased && false;
+
+        UpdateDetailsRootContainerCornerRadius(0);
     }
 
     protected override async void OnAppearing()
@@ -98,6 +129,11 @@ public partial class SeasonsPage : ContentPage
         if (!isDetailsRootContainerOpen && currentState == NarrowState)
         {
             detailsHiddenPosition = lastDetailsTranslation = DetailsRootContainer.TranslationY = DetailsRootContainer.Height - detailsHeaderHeight;
+            isDetailsRootContainerOpen = false;
+            ShowDetailsButton.IsVisible = !isTouchBased && true;
+            HideDetailsButton.IsVisible = false;
+            HeaderDetailsLabel.IsVisible = false;
+            SwipeUpDetailsContainer.IsVisible = isTouchBased && true;
         }
     }
 
@@ -122,5 +158,10 @@ public partial class SeasonsPage : ContentPage
     private async void ShowButtonClicked(object sender, EventArgs e)
     {
         await ShowDetails();
+    }
+
+    private async void HideButtonClicked(object sender, EventArgs e)
+    {
+        await HideDetails();
     }
 }
