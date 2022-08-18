@@ -135,6 +135,10 @@ public partial class SeasonsPage : ContentPage
             HeaderDetailsLabel.IsVisible = false;
             SwipeUpDetailsContainer.IsVisible = isTouchBased && true;
         }
+        else if (currentState == NarrowState)
+        {
+            detailsHiddenPosition = DetailsRootContainer.Height - detailsHeaderHeight;
+        }     
     }
 
     private async void DetailsPanUpdated(object sender, PanUpdatedEventArgs e)

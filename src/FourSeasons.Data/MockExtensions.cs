@@ -202,7 +202,7 @@ namespace FourSeasons.Data
                 yield return new MonthlyTouristStats
                 {
                     Id = Guid.NewGuid(),
-                    Stats = (int)Math.Round(Math.Sin((month / 3d) - 0.5d) * random.Next(100, 200)),
+                    Stats = (int)Math.Abs(Math.Round(Math.Sin((month / 4d) - 0.1d) * random.Next(100, 200))),
                     TouristStatsId = touristStats.Id,
                     Month = month
                 };

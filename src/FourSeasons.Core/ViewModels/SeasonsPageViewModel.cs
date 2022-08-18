@@ -102,9 +102,13 @@ namespace FourSeasons.Core.ViewModels
                                     Month = mt.Month,
                                     Stats = mt.Stats
                                 };
-                            }).ToList()
+                            })
+                            .OrderBy(m => m.Month)
+                            .ToList()
                         };
-                    }).ToList()
+                    })
+                    .OrderByDescending(t => t.Year)
+                    .ToList()
                 };
             }).ToList();
         }

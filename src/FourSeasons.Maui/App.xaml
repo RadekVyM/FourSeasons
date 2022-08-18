@@ -17,7 +17,11 @@
             <converters:TypeOfTransportToStringConverter x:Key="TypeOfTransportToStringConverter"/>
             <converters:BoolConverter x:Key="NarrowHeaderLabelColor" True="{StaticResource Primary}" False="{StaticResource White}"/>
             <converters:BoolConverter x:Key="NarrowHeaderDetailsColor" True="{StaticResource Secondary}" False="{StaticResource White}"/>
-            
+            <converters:YearNumberToTextConverter x:Key="YearNumberToTextConverter"/>
+            <converters:MonthNumberToTextConverter x:Key="MonthNumberToTextConverter"/>
+            <converters:TrendColorConverter x:Key="TrendColorConverter"/>
+            <converters:TrendToGeometryConverter x:Key="TrendToGeometryConverter"/>
+
             <x:String x:Key="PinString">M12,0C7,0,3,4,3,9c0,6.2,3.4,11.7,8.5,14.9c0.3,0.2,0.7,0.2,1.1,0C17.6,20.6,21,15.2,21,9C21,4,17,0,12,0z M12,13   c-2.2,0-4-1.8-4-4c0-2.2,1.8-4,4-4s4,1.8,4,4C16,11.2,14.2,13,12,13z</x:String>
 
             <extensions:PathGeometryExtension x:Key="PinGeometry" Path="{StaticResource PinString}"/>
