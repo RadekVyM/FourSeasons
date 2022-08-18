@@ -73,7 +73,21 @@ public partial class SeasonsPage : ContentPage
     {
         UpdateDetailsRootContainerCornerRadius(narrowDetailsRootContainerCornerRadius);
 
-        await DetailsRootContainer.TranslateTo(0, detailsHiddenPosition, length: 250);
+        uint animationLength = 250;
+
+        DetailsRootContainer.AbortAnimation("TranslationAnimation");
+
+        var animation = new Animation(v =>
+        {
+            DetailsRootContainer.TranslationY = v;
+        }, DetailsRootContainer.TranslationY, detailsHiddenPosition, finished: () =>
+        {
+            DetailsRootContainer.TranslationY = detailsHiddenPosition;
+        });
+        animation.Commit(DetailsRootContainer, "TranslationAnimation", length: animationLength);
+
+        await Task.Delay((int)animationLength);
+
         isDetailsRootContainerOpen = false;
         ShowDetailsButton.IsVisible = !isTouchBased && true;
         HideDetailsButton.IsVisible = false;
@@ -83,7 +97,21 @@ public partial class SeasonsPage : ContentPage
 
     private async Task ShowDetails()
     {
-        await DetailsRootContainer.TranslateTo(0, detailsShownPosition, length: 250);
+        uint animationLength = 250;
+
+        DetailsRootContainer.AbortAnimation("TranslationAnimation");
+
+        var animation = new Animation(v =>
+        {
+            DetailsRootContainer.TranslationY = v;
+        }, DetailsRootContainer.TranslationY, detailsShownPosition, finished: () =>
+        {
+            DetailsRootContainer.TranslationY = detailsShownPosition;
+        });
+        animation.Commit(DetailsRootContainer, "TranslationAnimation", length: animationLength);
+
+        await Task.Delay((int)animationLength);
+
         isDetailsRootContainerOpen = true;
         ShowDetailsButton.IsVisible = !isTouchBased && false;
         HideDetailsButton.IsVisible = true;
@@ -147,7 +175,8 @@ public partial class SeasonsPage : ContentPage
         {
             case GestureStatus.Running:
                 lastDetailsTranslation = DetailsRootContainer.TranslationY + e.TotalY;
-                await DetailsRootContainer.TranslateTo(0, Math.Min(Math.Max(lastDetailsTranslation, detailsShownPosition), detailsHiddenPosition), length: 50);
+
+                DetailsRootContainer.TranslationY = Math.Min(Math.Max(lastDetailsTranslation, detailsShownPosition), detailsHiddenPosition);
                 break;
             case GestureStatus.Canceled:
             case GestureStatus.Completed:

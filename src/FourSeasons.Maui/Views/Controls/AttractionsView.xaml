@@ -27,13 +27,13 @@
                     <Grid RowDefinitions="auto,auto" HorizontalOptions="Fill">
                         <!-- Sizing of this border with image is totally weird on Android and Windows (I have not tested it on iOS/macOS) -->
                         <Border HorizontalOptions="Fill" StrokeThickness="0"
-                                Margin="10"
-                                HeightRequest="{Binding Source={RelativeSource Mode=Self}, Path=Width}">
+                                Margin="10">
                             <Border.StrokeShape>
                                 <RoundRectangle CornerRadius="10"/>
                             </Border.StrokeShape>
                             <Image Source="{Binding Image}" Aspect="AspectFill"
-                                   HorizontalOptions="Fill" VerticalOptions="Fill"/>
+                                   HorizontalOptions="Fill" VerticalOptions="Fill"
+                                   HeightRequest="{Binding Source={RelativeSource Mode=Self}, Path=Width}"/>
                         </Border>
 
                         <Label Grid.Row="1" Text="{Binding Name}" HorizontalOptions="Center"
