@@ -17,13 +17,17 @@ App was built using just .NET MAUI, no additional packages were used.
 These are all the platforms I tested the app on:
 
 - Android
-- iOS
+- iOS (iPadOS)
 - Windows 
 
 <p align="center">
-  <img src="https://github.com/RadekVyM/FourSeasons/blob/main/images/windows.gif" data-canonical-src="https://github.com/RadekVyM/FourSeasons/blob/main/images/windows.gif" width="614" height="400"/>
-  
-  <img src="https://github.com/RadekVyM/FourSeasons/blob/main/images/android.gif" data-canonical-src="https://github.com/RadekVyM/FourSeasons/blob/main/images/android.gif" width="200" height="400"/>
+  <a href="https://user-images.githubusercontent.com/65116078/185754733-a1d61a50-b68c-4cf2-a503-2a3eaea90f79.mp4">
+    <img src="https://github.com/RadekVyM/FourSeasons/blob/main/images/windows.gif" data-canonical-src="https://user-images.githubusercontent.com/65116078/185754722-d849213b-3c8a-4433-8e0a-11a4ec243f69.mp4" width="614" height="400"/>
+  </a>
+ 
+  <a href="https://user-images.githubusercontent.com/65116078/185754722-d849213b-3c8a-4433-8e0a-11a4ec243f69.mp4"> 
+    <img src="https://github.com/RadekVyM/FourSeasons/blob/main/images/android.gif" data-canonical-src="https://user-images.githubusercontent.com/65116078/185754733-a1d61a50-b68c-4cf2-a503-2a3eaea90f79.mp4" width="200" height="400"/>
+  </a>
 </p>
 
 ### Features
