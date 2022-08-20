@@ -11,7 +11,7 @@
   <img src="https://github.com/RadekVyM/FourSeasons/blob/main/images/all_devices.png" data-canonical-src="https://github.com/RadekVyM/FourSeasons/blob/main/images/all_devices.png"/>
 </p>
 
-App was built using just .NET MAUI, no additional packages were used.
+The application was built using only .NET MAUI, no additional packages were used.
 
 ### Supported platforms
 These are all the platforms I tested the app on:
