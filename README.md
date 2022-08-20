@@ -38,3 +38,5 @@ These are all the platforms I tested the app on:
 - Custom tab control
 - Custom bottom sheet
 - Use of the new .NET MAUI APIs and controls
+
+[![snppts](https://camo.githubusercontent.com/cd35f0ca9d14d9c9a7c4f35e9321fc32fa6369570292080e6c44fe8522768139/68747470733a2f2f7777772e736e707074732e6465762f696d672f736e707074732d62616467652e6a7067)](https://snppts.dev/)
