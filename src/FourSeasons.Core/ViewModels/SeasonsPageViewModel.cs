@@ -77,6 +77,7 @@ namespace FourSeasons.Core.ViewModels
                     {
                         LocationId = s.Location.Id,
                         Area = s.Location.Area,
+                        ShortArea = s.Location.ShortArea,
                         Country = s.Location.Country
                     },
                     Attractions = s.Attractions.Select(a =>
@@ -118,7 +119,7 @@ namespace FourSeasons.Core.ViewModels
             return new DistanceViewModel
             {
                 CurrentLocation = "Prague",
-                DestinationLocation = season.Location.Area,
+                DestinationLocation = season.Location.ShortArea,
                 Distance = 4002,
                 TypeOfTransport = TypeOfTransport.Car
             };

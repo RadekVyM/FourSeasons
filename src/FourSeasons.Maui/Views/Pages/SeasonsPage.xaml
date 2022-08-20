@@ -110,6 +110,8 @@
     </VisualStateManager.VisualStateGroups>
 
     <Grid x:Name="RootGrid"
+          IgnoreSafeArea="True"
+          IsClippedToBounds="True"
           RowDefinitions="128,*,80" ColumnDefinitions="60,5*,4*">
         <BoxView x:Name="BackgroundBoxView" Grid.Column="2" Grid.RowSpan="3" Color="#f0f4f7"/>
 
@@ -123,8 +125,8 @@
                    LineBreakMode="NoWrap"/>
         </VerticalStackLayout>
 
-        <!-- TODO: Ignore safe area -->
         <Grid x:Name="BackgroundImageContainer"
+              IgnoreSafeArea="True"
               Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2"
               HorizontalOptions="Fill" VerticalOptions="Fill"
               IsClippedToBounds="True">
@@ -242,7 +244,8 @@
                            IsVisible="False"/>
                     
                     <Grid x:Name="SwipeUpDetailsContainer"
-                          RowDefinitions="*,*" RowSpacing="6">
+                          RowDefinitions="*,*" RowSpacing="6"
+                          Margin="{OnPlatform '0,0,0,0', iOS='0,0,0,15'}">
                         <Border HorizontalOptions="Center" VerticalOptions="End"
                                 WidthRequest="22" HeightRequest="22" Padding="6"
                                 StrokeThickness="0" Background="#eef1f6">

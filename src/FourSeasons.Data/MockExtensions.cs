@@ -20,6 +20,7 @@ namespace FourSeasons.Data
             {
                 Id = Guid.NewGuid(),
                 Area = "Asalem - Khalkhal",
+                ShortArea = "Khalkhal",
                 Country = "Iran",
             };
 
