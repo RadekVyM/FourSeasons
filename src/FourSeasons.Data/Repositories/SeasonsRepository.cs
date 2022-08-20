@@ -17,7 +17,7 @@ namespace FourSeasons.Data.Repositories
         {
             using (var dbContext = contextFactory.CreateDbContext())
             {
-                dbContext.Database.EnsureCreated(); // This is probably bad
+                dbContext.Database.EnsureCreated();
 
                 var seasons = dbContext.Seasons
                     .Include(s => s.TouristStats)

@@ -26,7 +26,6 @@
                                 <Border.StrokeShape>
                                     <RoundRectangle CornerRadius="11"/>
                                 </Border.StrokeShape>
-                                <!-- I have to wrap Path to ContentView because of weir sizing -->
                                 <Path Stroke="{StaticResource White}" StrokeThickness="1.5" StrokeLineJoin="Round" StrokeLineCap="Round"
                                       Aspect="Uniform" Data="{Binding Trend, Converter={StaticResource TrendToGeometryConverter}}"/>
                             </Border>

@@ -6,7 +6,6 @@
              x:Class="FourSeasons.Maui.Views.Controls.AttractionsView">
 
     <!-- I cannot use MaximumWidthRequest because Grid will automatically fill that value even if there is not enough space -->
-    <!-- Grid sizing is totally buggy and there are no usable solutions to it -->
     
     <Grid x:Name="rootGrid" BindableLayout.ItemsSource="{Binding .}"
           ColumnDefinitions="*,*,*" RowDefinitions="auto" ColumnSpacing="12"
