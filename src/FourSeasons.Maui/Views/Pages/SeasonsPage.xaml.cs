@@ -30,6 +30,8 @@ public partial class SeasonsPage : ContentPage
 	{
 		InitializeComponent();
 
+        UpdateState(0);
+
         ShowDetailsButton.IsVisible = !isTouchBased;
         SwipeUpDetailsContainer.IsVisible = isTouchBased;
 
@@ -45,6 +47,9 @@ public partial class SeasonsPage : ContentPage
     {
         var isNarrow = width < stateBreakpoint;
         var newState = isNarrow ? NarrowState : WideState;
+
+        if (!isNarrow && DetailsRootContainer.BindingContext != seasonsPageViewModel.CurrentSeason)
+            DetailsRootContainer.BindingContext = seasonsPageViewModel.CurrentSeason;
 
         if (currentState == newState)
             return;
@@ -135,6 +140,8 @@ public partial class SeasonsPage : ContentPage
 
     private void SeasonsPageLoaded(object sender, EventArgs e)
 	{
+        seasonsPageViewModel.PropertyChanged += SeasonsPageViewModelPropertyChanged;
+
 #if WINDOWS
         image.Behaviors.Add(new CenteredImageBehavior());
 #endif
@@ -142,9 +149,21 @@ public partial class SeasonsPage : ContentPage
 
     private void SeasonsPageUnloaded(object sender, EventArgs e)
     {
+        seasonsPageViewModel.PropertyChanged -= SeasonsPageViewModelPropertyChanged;
         Loaded -= SeasonsPageLoaded;
         Unloaded -= SeasonsPageUnloaded;
         SizeChanged -= SeasonsPageSizeChanged;
+    }
+
+    private void SeasonsPageViewModelPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+    {
+        if (e.PropertyName == nameof(ISeasonsPageViewModel.CurrentSeason))
+        {
+            if (currentState != NarrowState)
+            {
+                DetailsRootContainer.BindingContext = seasonsPageViewModel.CurrentSeason;
+            }
+        }
     }
 
     private void SeasonsPageSizeChanged(object sender, EventArgs e)
@@ -173,9 +192,12 @@ public partial class SeasonsPage : ContentPage
 	{
         switch (e.StatusType)
         {
+            case GestureStatus.Started:
+                if (DetailsRootContainer.BindingContext != seasonsPageViewModel.CurrentSeason)
+                    DetailsRootContainer.BindingContext = seasonsPageViewModel.CurrentSeason;
+                break;
             case GestureStatus.Running:
                 lastDetailsTranslation = DetailsRootContainer.TranslationY + e.TotalY;
-
                 DetailsRootContainer.TranslationY = Math.Min(Math.Max(lastDetailsTranslation, detailsShownPosition), detailsHiddenPosition);
                 break;
             case GestureStatus.Canceled:
@@ -190,6 +212,8 @@ public partial class SeasonsPage : ContentPage
 
     private async void ShowButtonClicked(object sender, EventArgs e)
     {
+        if (DetailsRootContainer.BindingContext != seasonsPageViewModel.CurrentSeason)
+            DetailsRootContainer.BindingContext = seasonsPageViewModel.CurrentSeason;
         await ShowDetails();
     }
 

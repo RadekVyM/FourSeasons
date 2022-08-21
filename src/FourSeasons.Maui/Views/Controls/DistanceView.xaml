@@ -14,10 +14,12 @@
         
         <Grid RowDefinitions="auto,*" RowSpacing="12"
               Margin="12"
-              IsClippedToBounds="False">
+              IsClippedToBounds="False"
+              CompressedLayout.IsHeadless="True">
             <Label Text="{Binding TypeOfTransport, Converter={StaticResource TypeOfTransportToStringConverter}}"
                    FontAttributes="Bold"/>
-            <HorizontalStackLayout HorizontalOptions="End" Spacing="8">
+            <HorizontalStackLayout HorizontalOptions="End" Spacing="8"
+                                   CompressedLayout.IsHeadless="True">
                 <Image Source="cute_distance_icon.png"
                        HeightRequest="12" Aspect="AspectFit"
                        VerticalOptions="Center" Margin="0,0,0,3"/>
@@ -36,7 +38,8 @@
                     <Shadow Brush="{StaticResource Gray300}" Radius="10"/>
                 </Border.Shadow>-->
 
-                <Grid ColumnDefinitions="40,*,40,*,40" ColumnSpacing="8">
+                <Grid ColumnDefinitions="40,*,40,*,40" ColumnSpacing="8"
+                      CompressedLayout.IsHeadless="True">
                     <Border VerticalOptions="Center" HeightRequest="40" StrokeThickness="0">
                         <Border.StrokeShape>
                             <RoundRectangle CornerRadius="20"/>

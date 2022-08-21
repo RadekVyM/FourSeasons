@@ -15,11 +15,13 @@
             <BindableLayout.ItemTemplate>
                 <DataTemplate x:DataType="viewModels:TouristStatsViewModel">
                     <Grid RowDefinitions="*,*" ColumnDefinitions="*,*"
-                          Padding="16">
+                          Padding="16"
+                          CompressedLayout.IsHeadless="True">
                         <Label Text="{Binding Year, Converter={StaticResource YearNumberToTextConverter}, StringFormat='Tourist - {0}'}"
                                TextColor="{StaticResource Secondary}" FontAttributes="Bold"/>
-                        
-                        <HorizontalStackLayout Grid.Row="1" Spacing="5">
+
+                        <HorizontalStackLayout Grid.Row="1" Spacing="5"
+                                               CompressedLayout.IsHeadless="True">
                             <Border Stroke="Transparent" StrokeThickness="0"
                                     Background="{Binding Trend, Converter={StaticResource TrendColorConverter}}"
                                     WidthRequest="15" HeightRequest="15" Padding="4">

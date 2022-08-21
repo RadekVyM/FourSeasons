@@ -7,9 +7,11 @@
 
     <!-- I cannot use MaximumWidthRequest because Grid will automatically fill that value even if there is not enough space -->
     
-    <Grid x:Name="rootGrid" BindableLayout.ItemsSource="{Binding .}"
+    <Grid x:Name="rootGrid"
+          BindableLayout.ItemsSource="{Binding .}"
           ColumnDefinitions="*,*,*" RowDefinitions="auto" ColumnSpacing="12"
-          HorizontalOptions="{OnPlatform Fill, WinUI=Start}">
+          HorizontalOptions="{OnPlatform Fill, WinUI=Start}"
+          CompressedLayout.IsHeadless="True">
 
         <BindableLayout.ItemTemplate>
             <DataTemplate x:DataType="viewModels:AttractionViewModel">
@@ -22,9 +24,11 @@
                     <Border.StrokeShape>
                         <RoundRectangle CornerRadius="12"/>
                     </Border.StrokeShape>
-                    
-                    <Grid RowDefinitions="auto,auto" HorizontalOptions="Fill">
-                        <!-- Sizing of this border with image is totally weird on Android and Windows (I have not tested it on iOS/macOS) -->
+
+                    <Grid RowDefinitions="auto,auto" HorizontalOptions="Fill"
+                          CompressedLayout.IsHeadless="True">
+                        <!-- Sizing of this border with image is totally weird on Android and Windows -->
+                        <!-- Border is not clipping the image on iOS -->
                         <Border HorizontalOptions="Fill" StrokeThickness="0"
                                 Margin="10">
                             <Border.StrokeShape>

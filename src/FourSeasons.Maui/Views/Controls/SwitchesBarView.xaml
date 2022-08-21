@@ -4,15 +4,20 @@
              x:Class="FourSeasons.Maui.Views.Controls.SwitchesBarView"
              BackgroundColor="Transparent">
 
-    <Grid Padding="0" Margin="0">
+    <Grid Padding="0" Margin="0"
+          CompressedLayout.IsHeadless="True">
         <GraphicsView x:Name="graphicsView" BackgroundColor="Transparent"/>
-        <AbsoluteLayout x:Name="absoluteLayout" Margin="0" Padding="0">
+        <AbsoluteLayout x:Name="absoluteLayout" Margin="0" Padding="0"
+                        CompressedLayout.IsHeadless="True">
             <BindableLayout.ItemTemplate>
                 <DataTemplate>
-                    <Grid IsClippedToBounds="True">
-                        <Grid ColumnDefinitions="auto, *">
+                    <Grid IsClippedToBounds="True"
+                          CompressedLayout.IsHeadless="True">
+                        <Grid ColumnDefinitions="auto, *"
+                              CompressedLayout.IsHeadless="True">
                             <ContentView WidthRequest="{Binding Source={x:Reference absoluteLayout}, Path=Height}"
-                                  HeightRequest="{Binding Source={x:Reference absoluteLayout}, Path=Height}">
+                                         HeightRequest="{Binding Source={x:Reference absoluteLayout}, Path=Height}"
+                                         CompressedLayout.IsHeadless="True">
                                 <Border x:Name="border" Margin="9" Background="White">
                                     <Border.StrokeShape>
                                         <RoundRectangle CornerRadius="{Binding Source={x:Reference border}, ConverterParameter=2, Converter={StaticResource DivideConverter}, Path=Height}"/>
@@ -23,7 +28,8 @@
                                         Aspect="AspectFit"/>
                                 </Border>
                             </ContentView>
-                            <ContentView Grid.Column="1">
+                            <ContentView Grid.Column="1"
+                                         CompressedLayout.IsHeadless="True">
                                 <Label Text="{Binding Name}"
                                        VerticalOptions="Center" HorizontalOptions="Start"
                                        TextColor="White"
