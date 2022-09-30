@@ -39,11 +39,13 @@
 
 		<!-- Images -->
 		<MauiImage Include="Resources\Images\*" />
-		<MauiImage Update="Resources\Images\autumn.jpg" BaseSize="1920,1208" />
-		<MauiImage Update="Resources\Images\rainy.jpg" BaseSize="1920,1208" />
-		<MauiImage Update="Resources\Images\summer.jpg" BaseSize="1920,1208" />
-		<MauiImage Update="Resources\Images\winter.png" BaseSize="1920,1208" />
-		<MauiImage Update="Resources\Images\dotnet_bot.svg" BaseSize="168,208" />
+		
+		<MauiImage Update="Resources\Images\autumn.jpg" BaseSize="763,480" Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) != 'windows'"/>
+		<MauiImage Update="Resources\Images\rainy.jpg" BaseSize="763,480" Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) != 'windows'"/>
+		<MauiImage Update="Resources\Images\summer.jpg" BaseSize="763,480" Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) != 'windows'"/>
+		<MauiImage Update="Resources\Images\winter.png" BaseSize="763,480" Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) != 'windows'"/>
+
+		<MauiImage Update="Resources\Images\dotnet_bot.svg" BaseSize="168,208"/>
 
 		<!-- Custom Fonts -->
 		<MauiFont Include="Resources\Fonts\*" />
