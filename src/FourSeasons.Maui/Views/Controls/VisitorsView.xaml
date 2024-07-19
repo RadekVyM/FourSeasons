@@ -1,47 +1,69 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<ContentView x:Class="FourSeasons.Maui.Views.Controls.VisitorsView"
-             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:viewModels="clr-namespace:FourSeasons.Core.ViewModels;assembly=FourSeasons.Core"
-             xmlns:controls="clr-namespace:FourSeasons.Maui.Views.Controls"
-             xmlns:local="clr-namespace:FourSeasons.Maui.Views.Controls">
+<ContentView
+    x:Class="FourSeasons.Maui.Views.Controls.VisitorsView"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:viewModels="clr-namespace:FourSeasons.Core.ViewModels;assembly=FourSeasons.Core"
+    xmlns:controls="clr-namespace:FourSeasons.Maui.Views.Controls"
+    xmlns:local="clr-namespace:FourSeasons.Maui.Views.Controls">
 
-    <Border StrokeThickness="1" Stroke="{StaticResource Gray100}">
-        <Border.StrokeShape>
-            <RoundRectangle CornerRadius="12"/>
-        </Border.StrokeShape>
-
-        <VerticalStackLayout BindableLayout.ItemsSource="{Binding .}">
+    <Border
+        StrokeThickness="1"
+        Stroke="{StaticResource Gray100}"
+        StrokeShape="{RoundRectangle CornerRadius=12}">
+        <VerticalStackLayout
+            BindableLayout.ItemsSource="{Binding .}">
             <BindableLayout.ItemTemplate>
-                <DataTemplate x:DataType="viewModels:TouristStatsViewModel">
-                    <Grid RowDefinitions="*,*" ColumnDefinitions="*,*"
-                          Padding="16"
-                          CompressedLayout.IsHeadless="True">
-                        <Label Text="{Binding Year, Converter={StaticResource YearNumberToTextConverter}, StringFormat='Tourist - {0}'}"
-                               TextColor="{StaticResource Secondary}" FontAttributes="Bold"/>
+                <DataTemplate
+                    x:DataType="viewModels:TouristStatsViewModel">
+                    <Grid
+                        RowDefinitions="*, *"
+                        ColumnDefinitions="*, *"
+                        Padding="16">
+                        <Label
+                            Text="{Binding Year, Converter={StaticResource YearNumberToTextConverter}, StringFormat='Tourist - {0}'}"
+                            TextColor="{StaticResource Secondary}"
+                            FontAttributes="Bold" />
 
-                        <HorizontalStackLayout Grid.Row="1" Spacing="5"
-                                               CompressedLayout.IsHeadless="True">
-                            <Border Stroke="Transparent" StrokeThickness="0"
-                                    Background="{Binding Trend, Converter={StaticResource TrendColorConverter}}"
-                                    WidthRequest="15" HeightRequest="15" Padding="4">
-                                <Border.StrokeShape>
-                                    <RoundRectangle CornerRadius="11"/>
-                                </Border.StrokeShape>
-                                <Path Stroke="{StaticResource White}" StrokeThickness="1.5" StrokeLineJoin="Round" StrokeLineCap="Round"
-                                      Aspect="Uniform" Data="{Binding Trend, Converter={StaticResource TrendToGeometryConverter}}"/>
+                        <HorizontalStackLayout
+                            Grid.Row="1"
+                            Spacing="5">
+                            <Border
+                                Stroke="Transparent"
+                                StrokeThickness="0"
+                                Background="{Binding Trend, Converter={StaticResource TrendColorConverter}}"
+                                WidthRequest="15"
+                                HeightRequest="15"
+                                Padding="4"
+                                StrokeShape="{RoundRectangle CornerRadius=11}">
+                                <Path
+                                    Stroke="{StaticResource White}"
+                                    StrokeThickness="1.5"
+                                    StrokeLineJoin="Round"
+                                    StrokeLineCap="Round"
+                                    Aspect="Uniform"
+                                    Data="{Binding Trend, Converter={StaticResource TrendToGeometryConverter}}" />
                             </Border>
 
-                            <Label Text="{Binding Summary}"
-                                   FontFamily="PoppinsSemibold" FontAttributes="Bold"
-                                   VerticalOptions="Center"/>
+                            <Label
+                                Text="{Binding Summary}"
+                                FontFamily="PoppinsSemibold"
+                                FontAttributes="Bold"
+                                VerticalOptions="Center" />
 
-                            <Label Text="{Binding FirstMonthlyTouristStats.Month, Converter={StaticResource MonthNumberToTextConverter}, StringFormat='since {0}'}"
-                                   FontSize="10" FontAttributes="Bold" TextColor="{StaticResource Secondary}"
-                                   VerticalOptions="Center" Margin="{OnPlatform '0,2,0,0', Android='0,6,0,0'}"/>
+                            <Label
+                                Text="{Binding FirstMonthlyTouristStats.Month, Converter={StaticResource MonthNumberToTextConverter}, StringFormat='since {0}'}"
+                                FontSize="10"
+                                FontAttributes="Bold"
+                                TextColor="{StaticResource Secondary}"
+                                VerticalOptions="Center"
+                                Margin="{OnPlatform '0, 2, 0, 0', Android='0, 6, 0, 0'}" />
                         </HorizontalStackLayout>
 
-                        <controls:MonthlyStatsChartView BindingContext="{Binding .}" Grid.Column="1" Grid.RowSpan="2"/>
+                        <controls:MonthlyStatsChartView
+                            BindingContext="{Binding .}"
+                            Grid.Column="1"
+                            Grid.RowSpan="2" />
                     </Grid>
                 </DataTemplate>
             </BindableLayout.ItemTemplate>

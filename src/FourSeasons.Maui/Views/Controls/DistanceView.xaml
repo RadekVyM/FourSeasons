@@ -1,65 +1,95 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:viewModels="clr-namespace:FourSeasons.Core.ViewModels;assembly=FourSeasons.Core"
-             xmlns:converters="clr-namespace:FourSeasons.Maui.Converters"
-             x:Class="FourSeasons.Maui.Views.Controls.DistanceView"
-             x:DataType="viewModels:DistanceViewModel">
+<ContentView
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:viewModels="clr-namespace:FourSeasons.Core.ViewModels;assembly=FourSeasons.Core"
+    xmlns:converters="clr-namespace:FourSeasons.Maui.Converters"
+    x:Class="FourSeasons.Maui.Views.Controls.DistanceView"
+    x:DataType="viewModels:DistanceViewModel">
 
-    <Border Background="#eef1f6"
-            StrokeThickness="0">
-        <Border.StrokeShape>
-            <RoundRectangle CornerRadius="12"/>
-        </Border.StrokeShape>
-        
-        <Grid RowDefinitions="auto,*" RowSpacing="12"
-              Margin="12"
-              IsClippedToBounds="False"
-              CompressedLayout.IsHeadless="True">
-            <Label Text="{Binding TypeOfTransport, Converter={StaticResource TypeOfTransportToStringConverter}}"
-                   FontAttributes="Bold"/>
-            <HorizontalStackLayout HorizontalOptions="End" Spacing="8"
-                                   CompressedLayout.IsHeadless="True">
-                <Image Source="cute_distance_icon.png"
-                       HeightRequest="12" Aspect="AspectFit"
-                       VerticalOptions="Center" Margin="0,0,0,3"/>
-                <Label Text="{Binding Distance, StringFormat='{0} km'}" TextColor="{StaticResource Secondary}" FontAttributes="Bold"/>
+    <Border
+        Background="#eef1f6"
+        StrokeThickness="0"
+        StrokeShape="{RoundRectangle CornerRadius=12}">
+        <Grid
+            RowDefinitions="auto, *" RowSpacing="12"
+            Margin="12"
+            IsClippedToBounds="False">
+            <Label
+                Text="{Binding TypeOfTransport, Converter={StaticResource TypeOfTransportToStringConverter}}"
+                FontAttributes="Bold"/>
+            <HorizontalStackLayout
+                HorizontalOptions="End"
+                Spacing="8">
+                <Image
+                    Source="cute_distance_icon.png"
+                    HeightRequest="12"
+                    Aspect="AspectFit"
+                    VerticalOptions="Center"
+                    Margin="0, 0, 0, 3" />
+                <Label
+                    Text="{Binding Distance, StringFormat='{0} km'}"
+                    TextColor="{StaticResource Secondary}"
+                    FontAttributes="Bold" />
             </HorizontalStackLayout>
 
-            <Border Grid.Row="1"
-                    Background="White"
-                    Padding="12"
-                    StrokeThickness="0">
-                <Border.StrokeShape>
-                    <RoundRectangle CornerRadius="10"/>
-                </Border.StrokeShape>
+            <Border
+                Grid.Row="1"
+                Background="White"
+                Padding="12"
+                StrokeThickness="0"
+                StrokeShape="{RoundRectangle CornerRadius=10}">
                 <!-- Shadow is clipped so it is not usable. IDK why -->
                 <!--<Border.Shadow>
                     <Shadow Brush="{StaticResource Gray300}" Radius="10"/>
                 </Border.Shadow>-->
 
-                <Grid ColumnDefinitions="40,*,40,*,40" ColumnSpacing="8"
-                      CompressedLayout.IsHeadless="True">
-                    <Border VerticalOptions="Center" HeightRequest="40" StrokeThickness="0">
-                        <Border.StrokeShape>
-                            <RoundRectangle CornerRadius="20"/>
-                        </Border.StrokeShape>
-                        <Image Source="{Binding TypeOfTransport, Converter={StaticResource TypeOfTransportToImageConverter}}" HeightRequest="40" WidthRequest="40" Aspect="Center"/>
+                <Grid
+                    ColumnDefinitions="40, *, 40, *, 40"
+                    ColumnSpacing="8">
+                    <Border
+                        VerticalOptions="Center"
+                        HeightRequest="40"
+                        StrokeThickness="0"
+                        StrokeShape="{RoundRectangle CornerRadius=20}">
+                        <Image
+                            Source="{Binding TypeOfTransport, Converter={StaticResource TypeOfTransportToImageConverter}}"
+                            HeightRequest="40"
+                            WidthRequest="40"
+                            Aspect="Center" />
                     </Border>
 
-                    <Label Grid.Column="1" Text="{Binding CurrentLocation}" VerticalOptions="Center" HorizontalTextAlignment="Center"/>
+                    <Label
+                        Grid.Column="1"
+                        Text="{Binding CurrentLocation}"
+                        VerticalOptions="Center"
+                        HorizontalTextAlignment="Center" />
 
-                    <Image Grid.Column="2" Source="distance_arrow.png"
-                           HeightRequest="40" WidthRequest="40" Aspect="AspectFit"
-                           VerticalOptions="Center"/>
+                    <Image
+                        Grid.Column="2"
+                        Source="distance_arrow.png"
+                        HeightRequest="40"
+                        WidthRequest="40"
+                        Aspect="AspectFit"
+                        VerticalOptions="Center" />
 
-                    <Label Grid.Column="3" Text="{Binding DestinationLocation}" VerticalOptions="Center" HorizontalTextAlignment="Center"/>
+                    <Label
+                        Grid.Column="3"
+                        Text="{Binding DestinationLocation}"
+                        VerticalOptions="Center"
+                        HorizontalTextAlignment="Center" />
 
-                    <Border Grid.Column="4" VerticalOptions="Center" HeightRequest="40" StrokeThickness="0">
-                        <Border.StrokeShape>
-                            <RoundRectangle CornerRadius="20"/>
-                        </Border.StrokeShape>
-                        <Image Source="destination_pin.png" HeightRequest="40" WidthRequest="40" Aspect="Center"/>
+                    <Border
+                        Grid.Column="4"
+                        VerticalOptions="Center"
+                        HeightRequest="40"
+                        StrokeThickness="0"
+                        StrokeShape="{RoundRectangle CornerRadius=20}">
+                        <Image
+                            Source="destination_pin.png"
+                            HeightRequest="40"
+                            WidthRequest="40"
+                            Aspect="Center" />
                     </Border>
                 </Grid>
             </Border>

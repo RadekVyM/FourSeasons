@@ -1,48 +1,65 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<ContentView x:Class="FourSeasons.Maui.Views.Controls.DetailsImageView"
-             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:local="clr-namespace:FourSeasons.Maui.Views.Controls"
-             xmlns:viewModels="clr-namespace:FourSeasons.Core.ViewModels;assembly=FourSeasons.Core"
-             x:DataType="viewModels:SeasonViewModel">
+<ContentView
+    x:Class="FourSeasons.Maui.Views.Controls.DetailsImageView"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:FourSeasons.Maui.Views.Controls"
+    xmlns:viewModels="clr-namespace:FourSeasons.Core.ViewModels;assembly=FourSeasons.Core"
+    x:DataType="viewModels:SeasonViewModel">
 
-    <Border Background="#eef1f6"
-            StrokeThickness="0">
-        <Border.StrokeShape>
-            <RoundRectangle CornerRadius="12"/>
-        </Border.StrokeShape>
-
-        <Grid CompressedLayout.IsHeadless="True">
-            <Image Aspect="AspectFill" Source="{Binding Image}"
-                   HorizontalOptions="Fill" VerticalOptions="Fill"
-                   MaximumHeightRequest="300"/>
+    <Border
+        Background="#eef1f6"
+        StrokeThickness="0"
+        StrokeShape="{RoundRectangle CornerRadius=12}">
+        <Grid>
+            <Image
+                Aspect="AspectFill"
+                Source="{Binding Image}"
+                MaximumHeightRequest="300"/>
             
-            <Grid ColumnDefinitions="auto,*"
-                  RowDefinitions="auto,160"
-                  ColumnSpacing="24" RowSpacing="5"
-                  Margin="24"
-                  IsClippedToBounds="True"
-                  CompressedLayout.IsHeadless="True">
+            <Grid
+                ColumnDefinitions="auto, *"
+                RowDefinitions="auto, 160"
+                ColumnSpacing="24"
+                RowSpacing="5"
+                Margin="24"
+                IsClippedToBounds="True">
 
-                <Label FontFamily="PoppinsSemibold" FontAttributes="Bold" FontSize="36"
-                       Text="{Binding Name}"
-                       TextColor="{Binding LightImage, Converter={StaticResource NarrowHeaderLabelColor}}"
-                       VerticalOptions="Center" HorizontalOptions="Start"/>
-                <BoxView Grid.Column="1"
-                         Color="{Binding LightImage, Converter={StaticResource NarrowHeaderDetailsColor}}" Opacity="0.5"
-                         HorizontalOptions="Start" VerticalOptions="Center"
-                         WidthRequest="100" HeightRequest="1.5" Margin="0,8,0,0"/>
-                <HorizontalStackLayout Grid.Row="1" Grid.ColumnSpan="2" Spacing="10"
-                                       VerticalOptions="Start"
-                                       CompressedLayout.IsHeadless="True">
-                    <ContentView HeightRequest="18" VerticalOptions="Center"
-                                 CompressedLayout.IsHeadless="True">
-                        <Path Data="{StaticResource PinGeometry}" Fill="{Binding LightImage, Converter={StaticResource NarrowHeaderDetailsColor}}"
-                              Aspect="Uniform"/>
+                <Label
+                    FontFamily="PoppinsSemibold"
+                    FontAttributes="Bold"
+                    FontSize="36"
+                    Text="{Binding Name}"
+                    TextColor="{Binding LightImage, Converter={StaticResource NarrowHeaderLabelColor}}"
+                    VerticalOptions="Center"
+                    HorizontalOptions="Start"/>
+                <BoxView
+                    Grid.Column="1"
+                    Color="{Binding LightImage, Converter={StaticResource NarrowHeaderDetailsColor}}"
+                    Opacity="0.5"
+                    HorizontalOptions="Start"
+                    VerticalOptions="Center"
+                    WidthRequest="100"
+                    HeightRequest="1.5"
+                    Margin="0, 8, 0, 0"/>
+                <HorizontalStackLayout
+                    Grid.Row="1"
+                    Grid.ColumnSpan="2"
+                    Spacing="10"
+                    VerticalOptions="Start">
+                    <ContentView
+                        HeightRequest="18"
+                        VerticalOptions="Center">
+                        <Path
+                            Data="{StaticResource PinGeometry}" 
+                            Fill="{Binding LightImage, Converter={StaticResource NarrowHeaderDetailsColor}}"
+                            Aspect="Uniform" />
                     </ContentView>
-                    <Label TextColor="{Binding LightImage, Converter={StaticResource NarrowHeaderDetailsColor}}"
-                           Text="{Binding Location.CombinedAreaCountry, Mode=OneWay}"
-                           VerticalOptions="Center" Margin="0,3,0,0"/>
+                    <Label
+                        TextColor="{Binding LightImage, Converter={StaticResource NarrowHeaderDetailsColor}}"
+                        Text="{Binding Location.CombinedAreaCountry, Mode=OneWay}"
+                        VerticalOptions="Center"
+                        Margin="0, 3, 0, 0" />
                 </HorizontalStackLayout>
             </Grid>
         </Grid>

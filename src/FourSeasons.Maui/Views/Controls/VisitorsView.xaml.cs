@@ -1,10 +1,9 @@
-﻿namespace FourSeasons.Maui.Views.Controls
+﻿namespace FourSeasons.Maui.Views.Controls;
+
+public partial class VisitorsView : ContentView
 {
-    public partial class VisitorsView : ContentView
+    public VisitorsView()
     {
-        public VisitorsView()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
     }
 }

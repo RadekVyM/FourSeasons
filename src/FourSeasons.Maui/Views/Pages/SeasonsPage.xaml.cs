@@ -8,6 +8,7 @@ namespace FourSeasons.Maui.Views.Pages;
 
 public partial class SeasonsPage : ContentPage
 {
+    const string TranslationAnimationKey = "TranslationAnimation";
 	const string WideState = "Wide";
 	const string NarrowState = "Narrow";
 
@@ -80,7 +81,7 @@ public partial class SeasonsPage : ContentPage
 
         uint animationLength = 250;
 
-        DetailsRootContainer.AbortAnimation("TranslationAnimation");
+        DetailsRootContainer.AbortAnimation(TranslationAnimationKey);
 
         var animation = new Animation(v =>
         {
@@ -89,7 +90,7 @@ public partial class SeasonsPage : ContentPage
         {
             DetailsRootContainer.TranslationY = detailsHiddenPosition;
         });
-        animation.Commit(DetailsRootContainer, "TranslationAnimation", length: animationLength);
+        animation.Commit(DetailsRootContainer, TranslationAnimationKey, length: animationLength);
 
         await Task.Delay((int)animationLength);
 
@@ -104,7 +105,7 @@ public partial class SeasonsPage : ContentPage
     {
         uint animationLength = 250;
 
-        DetailsRootContainer.AbortAnimation("TranslationAnimation");
+        DetailsRootContainer.AbortAnimation(TranslationAnimationKey);
 
         var animation = new Animation(v =>
         {
@@ -113,7 +114,7 @@ public partial class SeasonsPage : ContentPage
         {
             DetailsRootContainer.TranslationY = detailsShownPosition;
         });
-        animation.Commit(DetailsRootContainer, "TranslationAnimation", length: animationLength);
+        animation.Commit(DetailsRootContainer, TranslationAnimationKey, length: animationLength);
 
         await Task.Delay((int)animationLength);
 
@@ -197,8 +198,13 @@ public partial class SeasonsPage : ContentPage
                     DetailsRootContainer.BindingContext = seasonsPageViewModel.CurrentSeason;
                 break;
             case GestureStatus.Running:
+#if IOS
+                lastDetailsTranslation = (isDetailsRootContainerOpen ? detailsShownPosition : detailsHiddenPosition) + e.TotalY;
+#else
                 lastDetailsTranslation = DetailsRootContainer.TranslationY + e.TotalY;
+#endif
                 DetailsRootContainer.TranslationY = Math.Min(Math.Max(lastDetailsTranslation, detailsShownPosition), detailsHiddenPosition);
+                System.Diagnostics.Debug.WriteLine(lastDetailsTranslation);
                 break;
             case GestureStatus.Canceled:
             case GestureStatus.Completed:

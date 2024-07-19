@@ -1,12 +1,12 @@
 namespace FourSeasons.Maui.Views.Controls;
 
-public partial class SwitchesBarView : ContentView
+public partial class SwitchesBarView : Grid
 {
-    private double itemHeight => Height;
-    private double defaultItemWidth => itemHeight;
-    private double selectedItemWidth => Width - (((Items?.Count() ?? 1) - 1) * defaultItemWidth);
+    private double ItemHeight => HeightRequest;
+    private double DefaultItemWidth => ItemHeight;
+    private double SelectedItemWidth => WidthRequest - (((Items?.Count() ?? 1) - 1) * DefaultItemWidth);
 
-    private SwitchesBarDrawable drawable;
+    private readonly SwitchesBarDrawable drawable;
     private object selectedItem = null;
 
     public static readonly BindableProperty ItemsProperty = BindableProperty.Create(nameof(Items), typeof(IEnumerable<object>), typeof(SwitchesBarView), propertyChanged: OnItemsChanged);
@@ -57,9 +57,9 @@ public partial class SwitchesBarView : ContentView
         {
             var itemView = absoluteLayout.Children[i] as View;
 
-            var width = itemView.BindingContext == SelectedItem ? selectedItemWidth : defaultItemWidth;
+            var width = itemView.BindingContext == SelectedItem ? SelectedItemWidth : DefaultItemWidth;
 
-            var rect = new Rect(left, 0, width, itemHeight);
+            var rect = new Rect(left, 0, width, ItemHeight);
 
             if (itemView.BindingContext == SelectedItem)
             {
@@ -100,8 +100,8 @@ public partial class SwitchesBarView : ContentView
                 animation.Add(0, 1, new Animation(v =>
                 {
                     var l = currentLeftSelected + ((newLeftSelected - currentLeftSelected) * v);
-                    var w = currentWidthSelected + (((itemView.BindingContext == newSelected ? selectedItemWidth : defaultItemWidth) - currentWidthSelected) * v);
-                    var rect = new Rect(l, 0, w, itemHeight);
+                    var w = currentWidthSelected + (((itemView.BindingContext == newSelected ? SelectedItemWidth : DefaultItemWidth) - currentWidthSelected) * v);
+                    var rect = new Rect(l, 0, w, ItemHeight);
 
                     if (itemView.BindingContext == newSelected)
                     {
@@ -120,13 +120,13 @@ public partial class SwitchesBarView : ContentView
                     itemView.Layout(rect);
                 }, 0, 1));
 
-                left += itemView.BindingContext == newSelected ? selectedItemWidth : defaultItemWidth;
+                left += itemView.BindingContext == newSelected ? SelectedItemWidth : DefaultItemWidth;
                 continue;
             }
 
             if (!needsToBeChanged)
             {
-                left += defaultItemWidth;
+                left += DefaultItemWidth;
                 continue;
             }
 
@@ -137,14 +137,14 @@ public partial class SwitchesBarView : ContentView
             animation.Add(0, 1, new Animation(v =>
             {
                 var l = currentLeft + ((newLeft - currentLeft) * v);
-                var w = currentWidth + ((defaultItemWidth - currentWidth) * v);
-                var rect = new Rect(l, 0, w, itemHeight);
+                var w = currentWidth + ((DefaultItemWidth - currentWidth) * v);
+                var rect = new Rect(l, 0, w, ItemHeight);
 
                 AbsoluteLayout.SetLayoutBounds(itemView, rect);
                 itemView.Layout(rect);
             }, 0, 1));
 
-            left += defaultItemWidth;
+            left += DefaultItemWidth;
         }
 
         animation.Commit(this, "Animation", finished: (v, b) =>

@@ -1,9 +1,8 @@
-﻿using FourSeasons.Data.Models;
+﻿using FourSeasons.Core.Models;
 
-namespace FourSeasons.Core.Interfaces
+namespace FourSeasons.Core.Interfaces;
+
+public interface ISeasonsService
 {
-    public interface ISeasonsService
-    {
-        Task<IList<Season>> GetSeasons();
-    }
+    Task<IList<Season>> GetSeasons();
 }

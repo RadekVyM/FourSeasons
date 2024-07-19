@@ -1,11 +1,7 @@
 ﻿using FourSeasons.Core.Interfaces;
 using FourSeasons.Core.Services;
 using FourSeasons.Core.ViewModels;
-using FourSeasons.Data;
-using FourSeasons.Data.Interfaces;
-using FourSeasons.Data.Repositories;
 using FourSeasons.Maui.Views.Pages;
-using SQLitePCL;
 
 namespace FourSeasons.Maui;
 
@@ -26,14 +22,13 @@ public static class MauiProgram
                 fonts.AddFont("SQUEMB.ttf", "SQUEMB");
             });
 
-		builder.Services.AddDbContextFactory<ApplicationDbContext>();
-		builder.Services.AddSingleton<ISeasonsRepository, SeasonsRepository>();
-
-		builder.Services.AddSingleton<ISeasonsService, SeasonsService>();
+		builder.Services.AddSingleton<ISeasonsService, MockSeasonsService>();
 
         builder.Services.AddTransient<SeasonsPage>();
 		builder.Services.AddTransient<ISeasonsPageViewModel, SeasonsPageViewModel>();
 
-        return builder.Build();
+        var app = builder.Build();
+
+		return app;
 	}
 }

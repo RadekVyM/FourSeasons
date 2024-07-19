@@ -1,10 +1,9 @@
 ﻿using System.ComponentModel;
 
-namespace FourSeasons.Core.Interfaces
+namespace FourSeasons.Core.Interfaces;
+
+public interface IBasePageViewModel : INotifyPropertyChanged
 {
-    public interface IBasePageViewModel : INotifyPropertyChanged
-    {
-        Task OnAppearing();
-        Task OnDisappearing();
-    }
+    Task OnAppearing();
+    Task OnDisappearing();
 }

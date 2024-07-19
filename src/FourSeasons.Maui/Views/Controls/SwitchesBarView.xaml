@@ -1,49 +1,52 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="FourSeasons.Maui.Views.Controls.SwitchesBarView"
-             BackgroundColor="Transparent">
+<Grid
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="FourSeasons.Maui.Views.Controls.SwitchesBarView"
+    Background="Transparent"
+    HeightRequest="60"
+    WidthRequest="340">
 
-    <Grid Padding="0" Margin="0"
-          CompressedLayout.IsHeadless="True">
-        <GraphicsView x:Name="graphicsView" BackgroundColor="Transparent"/>
-        <AbsoluteLayout x:Name="absoluteLayout" Margin="0" Padding="0"
-                        CompressedLayout.IsHeadless="True">
-            <BindableLayout.ItemTemplate>
-                <DataTemplate>
-                    <Grid IsClippedToBounds="True"
-                          CompressedLayout.IsHeadless="True">
-                        <Grid ColumnDefinitions="auto, *"
-                              CompressedLayout.IsHeadless="True">
-                            <ContentView WidthRequest="{Binding Source={x:Reference absoluteLayout}, Path=Height}"
-                                         HeightRequest="{Binding Source={x:Reference absoluteLayout}, Path=Height}"
-                                         CompressedLayout.IsHeadless="True">
-                                <Border x:Name="border" Margin="9" Background="White">
-                                    <Border.StrokeShape>
-                                        <RoundRectangle CornerRadius="{Binding Source={x:Reference border}, ConverterParameter=2, Converter={StaticResource DivideConverter}, Path=Height}"/>
-                                    </Border.StrokeShape>
-                                    <Image Source="{Binding Icon}"
-                                        VerticalOptions="Fill" HorizontalOptions="Fill"
-                                        Margin="5"
-                                        Aspect="AspectFit"/>
-                                </Border>
-                            </ContentView>
-                            <ContentView Grid.Column="1"
-                                         CompressedLayout.IsHeadless="True">
-                                <Label Text="{Binding Name}"
-                                       VerticalOptions="Center" HorizontalOptions="Start"
-                                       TextColor="White"
-                                       LineBreakMode="NoWrap"
-                                       Margin="0,4,6,0"/>
-                            </ContentView>
-                        </Grid>
-                        <Button HorizontalOptions="Fill" VerticalOptions="Fill" Background="Transparent" 
-                                CornerRadius="{Binding Source={RelativeSource Mode=Self}, ConverterParameter=2, Converter={StaticResource DivideConverter}, Path=Height}"
-                                Clicked="ButtonClicked"
-                                BorderWidth="0" BorderColor="Transparent"/>
-                    </Grid>
-                </DataTemplate>
-            </BindableLayout.ItemTemplate>
-        </AbsoluteLayout>
-    </Grid>
-</ContentView>
+    <GraphicsView
+        x:Name="graphicsView"
+        Background="Transparent" />
+
+    <AbsoluteLayout
+        x:Name="absoluteLayout">
+        <BindableLayout.ItemTemplate>
+            <DataTemplate>
+                <Grid
+                    ColumnDefinitions="60, *"
+                    IsClippedToBounds="True">
+                    <Border
+                        x:Name="border"
+                        Margin="9"
+                        Background="White"
+                        WidthRequest="42"
+                        HeightRequest="42"
+                        StrokeShape="{RoundRectangle CornerRadius='21'}">
+                        <Image
+                            Source="{Binding Icon}"
+                            Margin="5"
+                            Aspect="AspectFit" />
+                    </Border>
+                    <ContentView
+                        Grid.Column="1">
+                        <Label
+                            Text="{Binding Name}"
+                            VerticalOptions="Center" HorizontalOptions="Start"
+                            TextColor="White"
+                            LineBreakMode="NoWrap"
+                            Margin="0, 0, 6, 0" />
+                    </ContentView>
+                    <Button
+                        Grid.ColumnSpan="2"
+                        Background="Transparent"
+                        CornerRadius="30"
+                        Clicked="ButtonClicked"
+                        BorderWidth="0" BorderColor="Transparent" />
+                </Grid>
+            </DataTemplate>
+        </BindableLayout.ItemTemplate>
+    </AbsoluteLayout>
+</Grid>

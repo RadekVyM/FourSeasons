@@ -1,10 +1,9 @@
-﻿namespace FourSeasons.Maui.Views.Controls
+﻿namespace FourSeasons.Maui.Views.Controls;
+
+public partial class DetailsImageView : ContentView
 {
-    public partial class DetailsImageView : ContentView
+    public DetailsImageView()
     {
-        public DetailsImageView()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
     }
 }

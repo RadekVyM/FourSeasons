@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:vm="clr-namespace:FourSeasons.Core.ViewModels;assembly=FourSeasons.Core"
-             xmlns:controls="clr-namespace:FourSeasons.Maui.Views.Controls"
-             xmlns:converters="clr-namespace:FourSeasons.Maui.Converters"
-             x:Class="FourSeasons.Maui.Views.Pages.SeasonsPage"
-             Title="SeasonsPage"
-             x:DataType="vm:SeasonsPageViewModel">
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:vm="clr-namespace:FourSeasons.Core.ViewModels;assembly=FourSeasons.Core"
+    xmlns:controls="clr-namespace:FourSeasons.Maui.Views.Controls"
+    xmlns:converters="clr-namespace:FourSeasons.Maui.Converters"
+    x:Class="FourSeasons.Maui.Views.Pages.SeasonsPage"
+    Title="SeasonsPage"
+    x:DataType="vm:SeasonsPageViewModel"
+    Shell.NavBarIsVisible="False">
 
     <ContentPage.Resources>
         <Style TargetType="Label">
@@ -109,215 +111,327 @@
         </VisualStateGroup>
     </VisualStateManager.VisualStateGroups>
 
-    <Grid x:Name="RootGrid"
-          IgnoreSafeArea="True"
-          IsClippedToBounds="True"
-          CompressedLayout.IsHeadless="True">
-        <BoxView x:Name="BackgroundBoxView" Grid.Column="2" Grid.RowSpan="3" Color="#f0f4f7"
-                 IsVisible="False"/>
+    <Grid
+        x:Name="RootGrid"
+        IgnoreSafeArea="True"
+        IsClippedToBounds="True">
+        <BoxView
+            x:Name="BackgroundBoxView"
+            Grid.Column="2"
+            Grid.RowSpan="3"
+            Color="#f0f4f7"
+            IsVisible="False" />
 
-        <VerticalStackLayout x:Name="WideHeaderContainer"
-                             IsVisible="False"
-                             Grid.Column="1" Spacing="8"
-                             CompressedLayout.IsHeadless="True">
-            <Label FontFamily="Vertigup" FontSize="32" Text="Iran, four seasons" TextTransform="Uppercase"
-                   VerticalTextAlignment="End" HeightRequest="60"
-                   LineBreakMode="NoWrap"/>
-            <Label FontFamily="Vertigup" FontSize="32" Text="country" TextTransform="Uppercase"
-                   VerticalTextAlignment="Start" HeightRequest="60"
-                   LineBreakMode="NoWrap"/>
+        <VerticalStackLayout
+            x:Name="WideHeaderContainer"
+            Grid.Column="1"
+            IsVisible="False"
+            Spacing="8">
+            <Label
+                Text="Iran, four seasons"
+                FontFamily="Vertigup"
+                FontSize="32"
+                TextTransform="Uppercase"
+                VerticalTextAlignment="End"
+                HeightRequest="60"
+                LineBreakMode="NoWrap" />
+            <Label
+                Text="country"
+                FontFamily="Vertigup"
+                FontSize="32"
+                TextTransform="Uppercase"
+                VerticalTextAlignment="Start"
+                HeightRequest="60"
+                LineBreakMode="NoWrap" />
         </VerticalStackLayout>
 
-        <Grid x:Name="BackgroundImageContainer"
-              IgnoreSafeArea="True"
-              HorizontalOptions="Fill" VerticalOptions="Fill"
-              IsClippedToBounds="True"
-              CompressedLayout.IsHeadless="True">
-            <Image x:Name="image" Aspect="AspectFill" Source="{Binding CurrentSeason.Image}"
-                   HorizontalOptions="Fill" VerticalOptions="Fill"/>
+        <Grid
+            x:Name="BackgroundImageContainer"
+            IgnoreSafeArea="True"
+            IsClippedToBounds="True">
+            <Image
+                x:Name="image"
+                Aspect="AspectFill"
+                Source="{Binding CurrentSeason.Image}" />
         </Grid>
 
-        <controls:SwitchesBarView x:Name="SwitchesBarView"
-                                  HorizontalOptions="Start" VerticalOptions="End"
-                                  Items="{Binding Seasons}" SelectedItem="{Binding CurrentSeason, Mode=TwoWay}"
-                                  HeightRequest="60" MaximumWidthRequest="340"
-                                  Margin="20,16"/>
+        <controls:SwitchesBarView
+            x:Name="SwitchesBarView"
+            VerticalOptions="End"
+            Items="{Binding Seasons}"
+            SelectedItem="{Binding CurrentSeason, Mode=TwoWay}"
+            Margin="20, 16" />
 
-        <Grid x:Name="NarrowSeasonHeader"
-              Grid.Row="0" Grid.Column="0"
-              ColumnDefinitions="50,auto"
-              RowDefinitions="auto,auto,auto"
-              ColumnSpacing="5"
-              Margin="24,16"
-              HorizontalOptions="Fill" VerticalOptions="Start"
-              IsVisible="False"
-              CompressedLayout.IsHeadless="True">
-            <Label FontFamily="PoppinsSemibold" FontAttributes="Bold" FontSize="48"
-                   Text="{Binding CurrentSeason.Number}"
-                   TextColor="{Binding CurrentSeason.LightImage, Converter={StaticResource NarrowHeaderLabelColor}}"
-                   VerticalOptions="Center" HorizontalOptions="Start"/>
-            <BoxView Grid.Column="1"
-                     Color="{Binding CurrentSeason.LightImage, Converter={StaticResource NarrowHeaderDetailsColor}}" Opacity="0.5"
-                     HorizontalOptions="Start" VerticalOptions="Center"
-                     WidthRequest="100" HeightRequest="1.5"/>
-            <Label Grid.Row="1" Grid.ColumnSpan="2"
-                   FontFamily="PoppinsSemibold" FontAttributes="Bold" FontSize="48"
-                   TextColor="{Binding CurrentSeason.LightImage, Converter={StaticResource NarrowHeaderLabelColor}}"
-                   Text="{Binding CurrentSeason.Name}"/>
-            <HorizontalStackLayout Grid.Row="2" Grid.ColumnSpan="2" Spacing="10"
-                                   CompressedLayout.IsHeadless="True">
-                <ContentView HeightRequest="18" VerticalOptions="Center"
-                             CompressedLayout.IsHeadless="True">
-                    <Path Data="{StaticResource PinGeometry}" Fill="{Binding CurrentSeason.LightImage, Converter={StaticResource NarrowHeaderDetailsColor}}"
-                          Aspect="Uniform"/>
+        <Grid
+            x:Name="NarrowSeasonHeader"
+            Grid.Row="0"
+            Grid.Column="0"
+            RowDefinitions="auto, auto, auto"
+            ColumnDefinitions="50, auto"
+            ColumnSpacing="5"
+            Margin="24, 16"
+            VerticalOptions="Start"
+            IsVisible="False">
+            <Label
+                Text="{Binding CurrentSeason.Number}"
+                TextColor="{Binding CurrentSeason.LightImage, Converter={StaticResource NarrowHeaderLabelColor}}"
+                FontFamily="PoppinsSemibold"
+                FontAttributes="Bold"
+                FontSize="48"
+                VerticalOptions="Center"
+                HorizontalOptions="Start"/>
+            <BoxView
+                Grid.Column="1"
+                Color="{Binding CurrentSeason.LightImage, Converter={StaticResource NarrowHeaderDetailsColor}}"
+                Opacity="0.5"
+                HorizontalOptions="Start"
+                VerticalOptions="Center"
+                WidthRequest="100"
+                HeightRequest="1.5" />
+            <Label
+                Grid.Row="1"
+                Grid.ColumnSpan="2"
+                Text="{Binding CurrentSeason.Name}"
+                TextColor="{Binding CurrentSeason.LightImage, Converter={StaticResource NarrowHeaderLabelColor}}"
+                FontFamily="PoppinsSemibold"
+                FontAttributes="Bold"
+                FontSize="48" />
+            <HorizontalStackLayout
+                Grid.Row="2"
+                Grid.ColumnSpan="2"
+                Spacing="10">
+                <ContentView
+                    HeightRequest="18"
+                    VerticalOptions="Center">
+                    <Path
+                        Data="{StaticResource PinGeometry}"
+                        Fill="{Binding CurrentSeason.LightImage, Converter={StaticResource NarrowHeaderDetailsColor}}"
+                        Aspect="Uniform" />
                 </ContentView>
-                <Label TextColor="{Binding CurrentSeason.LightImage, Converter={StaticResource NarrowHeaderDetailsColor}}"
-                       Text="{Binding CurrentSeason.Location.CombinedAreaCountry, Mode=OneWay}"
-                       VerticalOptions="Center" Margin="0,3,0,0"/>
+                <Label
+                    Text="{Binding CurrentSeason.Location.CombinedAreaCountry, Mode=OneWay}"
+                    TextColor="{Binding CurrentSeason.LightImage, Converter={StaticResource NarrowHeaderDetailsColor}}"
+                    VerticalOptions="Center"
+                    Margin="0, 3, 0, 0" />
             </HorizontalStackLayout>
         </Grid>
 
-        <Grid x:Name="WideSeasonHeader"
-              Grid.Row="2" Grid.Column="1"
-              ColumnDefinitions="auto,auto,*,auto"
-              ColumnSpacing="15"
-              Margin="0,0,90,0"
-              HorizontalOptions="Fill"
-              CompressedLayout.IsHeadless="True">
-            <Label FontFamily="Vertigup" FontSize="36" Text="{Binding CurrentSeason.Number, StringFormat='0.{0}'}"
-                   TextColor="{StaticResource Secondary}"
-                   VerticalOptions="Center"/>
-            <Label Grid.Column="1" FontFamily="PoppinsSemibold" FontAttributes="Bold" FontSize="20"
-                   Margin="0,4,0,0"
-                   Text="{Binding CurrentSeason.Name}"
-                   VerticalOptions="Center"/>
-            <BoxView Grid.Column="2"
-                     Color="{StaticResource Secondary}" Opacity="0.15"
-                     Margin="10,4,10,0"
-                     HorizontalOptions="FillAndExpand" VerticalOptions="Center" HeightRequest="1.5"/>
+        <Grid
+            x:Name="WideSeasonHeader"
+            Grid.Row="2"
+            Grid.Column="1"
+            ColumnDefinitions="auto, auto, *, auto"
+            ColumnSpacing="15"
+            Margin="0, 0, 90, 0">
+            <Label
+                Text="{Binding CurrentSeason.Number, StringFormat='0.{0}'}"
+                TextColor="{StaticResource Secondary}"
+                FontFamily="Vertigup"
+                FontSize="36"
+                VerticalOptions="Center" />
+            <Label
+                Grid.Column="1"
+                Text="{Binding CurrentSeason.Name}"
+                FontFamily="PoppinsSemibold"
+                FontAttributes="Bold"
+                FontSize="20"
+                Margin="0, 4, 0, 0"
+                VerticalOptions="Center" />
+            <BoxView
+                Grid.Column="2"
+                Color="{StaticResource Secondary}"
+                Opacity="0.15"
+                Margin="10, 4, 10, 0"
+                VerticalOptions="Center"
+                HeightRequest="1.5" />
 
-            <HorizontalStackLayout Grid.Column="3" Margin="0,3,0,0" Spacing="10"
-                                   CompressedLayout.IsHeadless="True">
-                <ContentView HeightRequest="18" VerticalOptions="Center"
-                             CompressedLayout.IsHeadless="True">
-                    <Path Data="{StaticResource PinGeometry}" Fill="{StaticResource Secondary}"
-                          Aspect="Uniform"/>
+            <HorizontalStackLayout
+                Grid.Column="3"
+                Margin="0, 3, 0, 0"
+                Spacing="10">
+                <ContentView
+                    HeightRequest="18"
+                    VerticalOptions="Center">
+                    <Path
+                        Data="{StaticResource PinGeometry}"
+                        Fill="{StaticResource Secondary}"
+                        Aspect="Uniform" />
                 </ContentView>
-                <Label TextColor="{StaticResource Secondary}"
-                       Text="{Binding CurrentSeason.Location.CombinedAreaCountry, Mode=OneWay}"
-                       VerticalOptions="Center" Margin="0,3,0,0"/>
+                <Label
+                    Text="{Binding CurrentSeason.Location.CombinedAreaCountry, Mode=OneWay}"
+                    TextColor="{StaticResource Secondary}"
+                    VerticalOptions="Center"
+                    Margin="0, 3, 0, 0" />
             </HorizontalStackLayout>
         </Grid>
 
-        <Border x:Name="DetailsRootContainer"
-                StrokeThickness="1" Stroke="{StaticResource Gray100}"
-                Background="White"
-                Margin="-1"
-                SizeChanged="DetailsRootContainerSizeChanged"
-                BindingContext="{x:Null}"
-                x:DataType="vm:SeasonViewModel">
+        <Border
+            x:Name="DetailsRootContainer"
+            StrokeThickness="1"
+            Stroke="{StaticResource Gray100}"
+            StrokeShape="{RoundRectangle CornerRadius=0}"
+            Background="White"
+            Margin="-1"
+            SizeChanged="DetailsRootContainerSizeChanged"
+            BindingContext="{x:Null}"
+            x:DataType="vm:SeasonViewModel">
             <!-- Shadow sizing is weird on Windows -->
             <!--<Border.Shadow>
                 <Shadow Brush="{StaticResource Gray300}" Radius="5"/>
             </Border.Shadow>-->
-
-            <Border.StrokeShape>
-                <RoundRectangle CornerRadius="0"/>
-            </Border.StrokeShape>
-
-            <Grid x:Name="DetailsBaseContainer" RowDefinitions="auto,*" HorizontalOptions="Fill" VerticalOptions="Fill"
-                  CompressedLayout.IsHeadless="True">
-                <Grid x:Name="DetailsHeaderContainer"
-                      CompressedLayout.IsHeadless="True">
+            <Grid
+                x:Name="DetailsBaseContainer"
+                RowDefinitions="auto, *">
+                <Grid
+                    x:Name="DetailsHeaderContainer">
                     <Grid.GestureRecognizers>
                         <PanGestureRecognizer PanUpdated="DetailsPanUpdated"/>
                     </Grid.GestureRecognizers>
 
-                    <Button x:Name="ShowDetailsButton" Text="Click for Details" Clicked="ShowButtonClicked"
-                            Background="Transparent" TextColor="{StaticResource Secondary}"
-                            BorderWidth="0" BorderColor="Transparent"
-                            HorizontalOptions="Center" VerticalOptions="Center"/>
+                    <Button
+                        x:Name="ShowDetailsButton"
+                        Text="Click for Details"
+                        Clicked="ShowButtonClicked"
+                        Background="Transparent"
+                        TextColor="{StaticResource Secondary}"
+                        BorderWidth="0"
+                        BorderColor="Transparent"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center" />
                     
-                    <Grid x:Name="HideDetailsButton"
-                          HorizontalOptions="End" VerticalOptions="Center"
-                          Margin="0,0,20,0"
-                          IsVisible="False"
-                          CompressedLayout.IsHeadless="True">
-                        <Path Stroke="{StaticResource Primary}" StrokeThickness="1.5" StrokeLineJoin="Round" StrokeLineCap="Round"
-                              Aspect="Uniform" Data="M0,0 L10,10 M0,10 L10,0"
-                              WidthRequest="16" HeightRequest="16"/>
-                        <Button Clicked="HideButtonClicked"
-                                Background="Transparent" TextColor="{StaticResource Secondary}"
-                                BorderWidth="0" BorderColor="Transparent"/>
+                    <Grid
+                        x:Name="HideDetailsButton"
+                        HorizontalOptions="End"
+                        VerticalOptions="Center"
+                        Margin="0, 0, 20, 0"
+                        IsVisible="False">
+                        <Path
+                            Stroke="{StaticResource Primary}"
+                            StrokeThickness="1.5"
+                            StrokeLineJoin="Round"
+                            StrokeLineCap="Round"
+                            Aspect="Uniform"
+                            Data="M0,0 L10,10 M0,10 L10,0"
+                            WidthRequest="16"
+                            HeightRequest="16" />
+                        <Button
+                            Clicked="HideButtonClicked"
+                            Background="Transparent"
+                            TextColor="{StaticResource Secondary}"
+                            BorderWidth="0"
+                            BorderColor="Transparent" />
                     </Grid>
                     
-                    <Label x:Name="HeaderDetailsLabel" Text="Details"
-                           FontSize="16" FontAttributes="Bold" Margin="0,4,0,0"
-                           HorizontalOptions="Center" VerticalOptions="Center"
-                           IsVisible="False"/>
+                    <Label
+                        x:Name="HeaderDetailsLabel"
+                        Text="Details"
+                        FontSize="16"
+                        FontAttributes="Bold"
+                        Margin="0, 4, 0, 0"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"
+                        IsVisible="False" />
                     
-                    <Grid x:Name="SwipeUpDetailsContainer"
-                          RowDefinitions="*,*" RowSpacing="6"
-                          Margin="{OnPlatform '0,0,0,0', iOS='0,0,0,15'}"
-                          CompressedLayout.IsHeadless="True">
-                        <Border HorizontalOptions="Center" VerticalOptions="End"
-                                WidthRequest="22" HeightRequest="22" Padding="6"
-                                StrokeThickness="0" Background="#eef1f6">
+                    <Grid
+                        x:Name="SwipeUpDetailsContainer"
+                        RowDefinitions="*, *"
+                        RowSpacing="6"
+                        Margin="{OnPlatform '0,0,0,0', iOS='0,0,0,15'}">
+                        <Border
+                            HorizontalOptions="Center"
+                            VerticalOptions="End"
+                            WidthRequest="22"
+                            HeightRequest="22"
+                            Padding="6"
+                            StrokeThickness="0"
+                            Background="#eef1f6">
                             <Border.StrokeShape>
                                 <RoundRectangle CornerRadius="11"/>
                             </Border.StrokeShape>
-                            <Path Stroke="{StaticResource Primary}" StrokeThickness="2" StrokeLineJoin="Round" StrokeLineCap="Round"
-                                  Aspect="Uniform" Data="M0,9 L8,0 L16,9"/>
+                            <Path
+                                Stroke="{StaticResource Primary}"
+                                StrokeThickness="2"
+                                StrokeLineJoin="Round"
+                                StrokeLineCap="Round"
+                                Aspect="Uniform"
+                                Data="M0,9 L8,0 L16,9" />
                         </Border>
-                        <Label Grid.Row="1" HorizontalOptions="Center" VerticalOptions="Start"
-                               Text="Swipe Up for Details"
-                               TextColor="{StaticResource Secondary}" FontAttributes="Bold"/>
+                        <Label
+                            Grid.Row="1"
+                            HorizontalOptions="Center"
+                            VerticalOptions="Start"
+                            Text="Swipe Up for Details"
+                            TextColor="{StaticResource Secondary}"
+                            FontAttributes="Bold" />
                     </Grid>
                 </Grid>
 
-                <ScrollView x:Name="DetailsScrollView" VerticalOptions="Fill" HorizontalOptions="Fill"
-                            Orientation="Vertical">
-                    <Grid x:Name="DetailsScrollingContainer" VerticalOptions="Fill" HorizontalOptions="Fill"
-                          Padding="24"
-                          RowDefinitions="auto,auto,auto,auto,auto"
-                          RowSpacing="24"
-                          CompressedLayout.IsHeadless="True">
+                <ScrollView
+                    x:Name="DetailsScrollView"
+                    Orientation="Vertical">
+                    <Grid
+                        x:Name="DetailsScrollingContainer"
+                        Padding="24"
+                        RowDefinitions="auto, auto, auto, auto, auto"
+                        RowSpacing="24">
 
-                        <controls:DetailsImageView x:Name="DetailsImageView" BindingContext="{Binding .}"/>
+                        <controls:DetailsImageView
+                            x:Name="DetailsImageView"
+                            BindingContext="{Binding .}" />
 
-                        <VerticalStackLayout x:Name="DetailsContainer" Spacing="10"
-                                             CompressedLayout.IsHeadless="True">
-                            <Label Text="Details" FontFamily="PoppinsSemiBold" FontAttributes="Bold" FontSize="16"/>
+                        <VerticalStackLayout
+                            x:Name="DetailsContainer"
+                            Spacing="10">
+                            <Label
+                                Text="Details"
+                                FontFamily="PoppinsSemiBold"
+                                FontAttributes="Bold"
+                                FontSize="16" />
 
-                            <Label Text="{Binding Details}"
-                                   HorizontalOptions="Fill"/>
+                            <Label
+                                Text="{Binding Details}" />
                         </VerticalStackLayout>
 
-                        <VerticalStackLayout x:Name="DistanceContainer"
-                                             Grid.Row="1" Spacing="10"
-                                             CompressedLayout.IsHeadless="True">
-                            <Label Text="Distance" FontFamily="PoppinsSemiBold" FontAttributes="Bold" FontSize="16"/>
+                        <VerticalStackLayout
+                            x:Name="DistanceContainer"
+                            Grid.Row="1"
+                            Spacing="10">
+                            <Label
+                                Text="Distance"
+                                FontFamily="PoppinsSemiBold"
+                                FontAttributes="Bold"
+                                FontSize="16" />
 
-                            <controls:DistanceView BindingContext="{Binding Distance}"
-                                                   HorizontalOptions="Fill"/>
+                            <controls:DistanceView
+                                BindingContext="{Binding Distance}" />
                         </VerticalStackLayout>
 
-                        <VerticalStackLayout x:Name="VisitorsContainer"
-                                             Grid.Row="2" Spacing="10"
-                                             CompressedLayout.IsHeadless="True">
-                            <Label Text="Visitors" FontFamily="PoppinsSemiBold" FontAttributes="Bold" FontSize="16"/>
+                        <VerticalStackLayout
+                            x:Name="VisitorsContainer"
+                            Grid.Row="2"
+                            Spacing="10">
+                            <Label
+                                Text="Visitors"
+                                FontFamily="PoppinsSemiBold"
+                                FontAttributes="Bold"
+                                FontSize="16" />
 
-                            <controls:VisitorsView BindingContext="{Binding TouristStats}"
-                                                   HorizontalOptions="Fill"/>
+                            <controls:VisitorsView
+                                BindingContext="{Binding TouristStats}" />
                         </VerticalStackLayout>
 
-                        <VerticalStackLayout x:Name="AttractionsContainer"
-                                             Grid.Row="3" Spacing="10"
-                                             CompressedLayout.IsHeadless="True">
-                            <Label Text="Top Attractions" FontFamily="PoppinsSemiBold" FontAttributes="Bold" FontSize="16"/>
+                        <VerticalStackLayout
+                            x:Name="AttractionsContainer"
+                            Grid.Row="3"
+                            Spacing="10">
+                            <Label
+                                Text="Top Attractions"
+                                FontFamily="PoppinsSemiBold"
+                                FontAttributes="Bold"
+                                FontSize="16" />
 
-                            <controls:AttractionsView BindingContext="{Binding Attractions}"
-                                                      HorizontalOptions="Fill"/>
+                            <controls:AttractionsView
+                                BindingContext="{Binding Attractions}" />
                         </VerticalStackLayout>
                     </Grid>
                 </ScrollView>
